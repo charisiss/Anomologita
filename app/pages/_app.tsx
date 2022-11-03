@@ -1,6 +1,11 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { CommentContextProvider } from "../store/Comments-Context";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <CommentContextProvider>
+      <Component {...pageProps} />
+    </CommentContextProvider>
+  );
 }
