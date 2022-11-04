@@ -1,13 +1,18 @@
 import { Button } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddComment from "../components/AddComment/AddComment";
 import CommentsList from "../components/CommentsList/CommentsList";
 import classes from "../styles/Home.module.css";
 
 export default function Home() {
   const [openAddComment, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>("false");
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+  }, []);
+
   return (
     <div>
       <Head>
@@ -39,7 +44,7 @@ export default function Home() {
         </Button>
         <AddComment open={openAddComment} />
 
-        <CommentsList />
+        <CommentsList admin={isLoggedIn as string} />
       </main>
 
       <footer className={classes.footer}>

@@ -20,7 +20,7 @@ const AddComment = (props: Props) => {
     event?.preventDefault;
     if (textRef.current) {
       if (textRef.current.value == "") return;
-      //   ctx.addComment(textRef.current.value);
+      //ctx.addComment(textRef.current.value);
       textRef.current.value = "";
       //ctx.getComments("onWait").then((value) => console.log(value));
     }

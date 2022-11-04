@@ -1,18 +1,27 @@
 .card {
-    height: 100px;
-    width: 200px;
+  height: auto;
+  width: 200px;
 }
 
 .card h5 {
-    font-size: 15px;
-    position: relative;
-    top: 5%;
-    margin: 0px;
+  font-size: 15px;
+  position: relative;
+  top: 5%;
+  margin: 10px 0px 15px 0px;
 }
 
 .card p {
-    color: black;
-    margin-top: 0px;
-    position: relative;
-    top: 25%;
+  color: black;
+  margin-top: 0px;
+  position: relative;
+  top: 25%;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  align-self: center;
+  margin: 10px 0px 20px 0px;
 }
