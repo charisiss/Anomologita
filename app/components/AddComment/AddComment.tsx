@@ -23,6 +23,7 @@ const AddComment = (props: Props) => {
       ctx.addComment({ comment: textRef.current.value });
       textRef.current.value = "";
       ctx.updateComments("onWait");
+      ctx.updateComments("approved");
     }
   };
 

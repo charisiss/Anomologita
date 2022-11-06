@@ -1,8 +1,8 @@
 .main {
   display: flex !important;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .card {

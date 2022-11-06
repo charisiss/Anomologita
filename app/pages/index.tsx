@@ -11,13 +11,14 @@ import CommentContext from "../store/Comments-Context";
 const Home = () => {
   const [openAddComment, setOpen] = useState(false);
   const [comments, setComments] = useState<commentType[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState<string | null>("false");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // FALSE
   const ctx = useContext(CommentContext);
 
   useEffect(() => {
-    console.log("Comments Updated");
     setComments(ctx.onWaitComments);
-  }, ctx.onWaitComments);
+    ctx.updateComments("onWait");
+    ctx.updateComments("approved");
+  }, [ctx.onWaitComments]);
 
   return (
     <div>
@@ -49,8 +50,15 @@ const Home = () => {
           Προσθηκη Σχολιου
         </Button>
         <AddComment open={openAddComment} />
+        {isLoggedIn && (
+          <div>
+            <h5 style={{ color: "black" }}>WAIT LIST</h5>
+            <CommentsList admin={isLoggedIn} comments={comments} />
+            <h5 style={{ color: "black" }}>APPROVED</h5>
+          </div>
+        )}
 
-        <CommentsList admin={isLoggedIn as string} comments={comments} />
+        <CommentsList admin={false} comments={ctx.approvedComments} />
       </main>
 
       <footer className={classes.footer}>

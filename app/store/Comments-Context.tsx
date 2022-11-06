@@ -77,6 +77,7 @@ export const removeComment = async (props: string) => {
 };
 
 export const approveComment = async (props: string) => {
+  console.log("Approve");
   fetch(
     `https://totemic-chalice-352009-default-rtdb.europe-west1.firebasedatabase.app/redComments/onWait/${props}.json`
   )

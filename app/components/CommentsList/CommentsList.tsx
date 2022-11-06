@@ -10,7 +10,7 @@ import SendIcon from "@mui/icons-material/Send";
 import commentType from "../../types/CommentType";
 
 type Props = {
-  admin: string;
+  admin: boolean;
   comments: commentType[];
 };
 
@@ -34,14 +34,16 @@ const CommentsList = (props: Props) => {
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
+        alignItems="center"
+        justifyContent="center"
       >
         {Array.from(props.comments).map((item, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
+          <Grid item xs={2} sm={4} md={2} key={index}>
             <div className={`${classes.card} ${gClasses.card}`}>
               <h5>#{props.comments.length - index}</h5>
               <p>{item.comment}</p>
 
-              {Boolean(props.admin) && (
+              {props.admin && (
                 <div className={classes.buttons}>
                   <IconButton
                     aria-label="delete"
@@ -54,7 +56,7 @@ const CommentsList = (props: Props) => {
                   <IconButton
                     aria-label="send"
                     onClick={() => {
-                      handleApprove("12");
+                      handleApprove(item.id);
                     }}
                   >
                     <SendIcon />
