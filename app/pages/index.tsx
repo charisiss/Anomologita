@@ -1,17 +1,23 @@
 import { Button } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AddComment from "../components/AddComment/AddComment";
 import CommentsList from "../components/CommentsList/CommentsList";
 import classes from "../styles/Home.module.css";
+import commentType from "../types/CommentType";
+import CommentContext from "../store/Comments-Context";
 
-export default function Home() {
+const Home = () => {
   const [openAddComment, setOpen] = useState(false);
+  const [comments, setComments] = useState<commentType[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<string | null>("false");
+  const ctx = useContext(CommentContext);
+
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("isLoggedIn"));
-  }, []);
+    console.log("Comments Updated");
+    setComments(ctx.onWaitComments);
+  }, ctx.onWaitComments);
 
   return (
     <div>
@@ -31,7 +37,7 @@ export default function Home() {
           alt={"image"}
           className={classes.image}
         />
-        <h2>THIS IS A TEST</h2>
+        <br />
         <Button
           variant="contained"
           color="error"
@@ -44,7 +50,7 @@ export default function Home() {
         </Button>
         <AddComment open={openAddComment} />
 
-        <CommentsList admin={isLoggedIn as string} />
+        <CommentsList admin={isLoggedIn as string} comments={comments} />
       </main>
 
       <footer className={classes.footer}>
@@ -58,4 +64,6 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export default Home;

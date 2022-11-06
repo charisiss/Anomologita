@@ -1,16 +1,15 @@
 import React, { ReactNode, useState, useEffect } from "react";
 
-type commentType = {
-  comment: string;
-};
+import commentType from "../types/CommentType";
 
 type contextCommentType = {
-  comments: commentType[];
-  isLoading: boolean;
+  onWaitComments: commentType[];
+  approvedComments: commentType[];
   addComment: (props: { comment: string }) => {};
   removeComment: (props: string) => {};
   approveComment: (props: string) => {};
-  getComments: (props: string) => {};
+  getComments: (props: string) => Promise<commentType[]>;
+  updateComments: (props: string) => {};
 };
 
 type propsType = {
@@ -18,8 +17,8 @@ type propsType = {
 };
 
 const CommentContext = React.createContext<contextCommentType>({
-  comments: [],
-  isLoading: true,
+  onWaitComments: [],
+  approvedComments: [],
   addComment: (props: { comment: string }) => {
     return {};
   },
@@ -30,24 +29,24 @@ const CommentContext = React.createContext<contextCommentType>({
     return {};
   },
   getComments: (props: string) => {
-    return 0;
+    return Promise.resolve([]);
+  },
+  updateComments: (props: string) => {
+    return {};
   },
 });
 
 export const getComments = async (props: string) => {
-  const loadedComments: Array<string> = [];
+  const loadedComments: Array<commentType> = [];
 
-  fetch(
+  return fetch(
     `https://totemic-chalice-352009-default-rtdb.europe-west1.firebasedatabase.app/redComments/${props}.json`
   )
     .then((res) => res.json())
     .then((responseData) => {
       for (const key in responseData) {
-        loadedComments.push(responseData[key]);
+        loadedComments.push({ comment: responseData[key].comment, id: key });
       }
-    })
-    .then(() => {
-      console.log(loadedComments);
       return loadedComments;
     });
 };
@@ -66,7 +65,6 @@ export const addComment = async (props: { comment: string }) => {
 };
 
 export const removeComment = async (props: string) => {
-  const loadedComments: Array<string> = [];
   await fetch(
     `https://totemic-chalice-352009-default-rtdb.europe-west1.firebasedatabase.app/redComments/onWait/${props}.json`,
     {
@@ -79,8 +77,6 @@ export const removeComment = async (props: string) => {
 };
 
 export const approveComment = async (props: string) => {
-  const loadedComments: Array<string> = [];
-
   fetch(
     `https://totemic-chalice-352009-default-rtdb.europe-west1.firebasedatabase.app/redComments/onWait/${props}.json`
   )
@@ -101,37 +97,41 @@ export const approveComment = async (props: string) => {
 };
 
 export const CommentContextProvider: React.FC<propsType> = (props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [commentsList, setCommentsList] = useState<commentType[]>([]);
+  const [onWaitCommentsList, setOnWaitCommentsList] = useState<commentType[]>(
+    []
+  );
+  const [approvedCommentsList, setApprovedCommentsList] = useState<
+    commentType[]
+  >([]);
 
-  // useEffect(() => {
-  //   let loadedComments: commentType[] = [];
-  //   fetch(
-  //     "https://totemic-chalice-352009-default-rtdb.europe-west1.firebasedatabase.app/redComments/onWait.json"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((responseData) => {
-  //       for (const key in responseData) {
-  //         loadedComments.push({
-  //           comment: responseData[key].comment,
-  //         });
+  useEffect(() => {
+    updateComments("onWait");
+    updateComments("approved");
+  }, []);
 
-  //         loadedComments = [];
-  //       }
-  //     });
-  //   setCommentsList(loadedComments);
-  //   setIsLoading(false);
-  // }, []);
+  const updateComments = (props: string) => {
+    getComments(props).then((value) => {
+      if (props === "onWait") {
+        setOnWaitCommentsList([]);
+        value.map((item) => setOnWaitCommentsList((prev) => [item, ...prev]));
+      } else {
+        setApprovedCommentsList([]);
+        value.map((item) => setApprovedCommentsList((prev) => [item, ...prev]));
+      }
+    });
+    return {};
+  };
 
   return (
     <CommentContext.Provider
       value={{
-        comments: commentsList,
-        isLoading: isLoading,
+        onWaitComments: onWaitCommentsList,
+        approvedComments: approvedCommentsList,
         addComment: addComment,
         removeComment: removeComment,
         approveComment: approveComment,
         getComments: getComments,
+        updateComments: updateComments,
       }}
     >
       {props.children}

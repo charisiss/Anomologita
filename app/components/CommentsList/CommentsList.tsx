@@ -7,36 +7,25 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 
-const list = [
-  "test1",
-  "test3333333333333333333333333333333333333",
-  "test4",
-  "test5",
-  "test6",
-  "test7",
-];
+import commentType from "../../types/CommentType";
 
 type Props = {
   admin: string;
+  comments: commentType[];
 };
 
 const CommentsList = (props: Props) => {
-  const [commentsList, setCommentsList] = useState();
   const ctx = useContext(CommentContext);
 
-  const [comments, setComments] = useState(ctx.getComments("onWait"));
-
-  useEffect(() => {
-    ctx.getComments("onWait").then((value) => console.log(value));
-    // .then((value) => value.map((sad) => console.log("s")));
-  }, []);
-
   const handleDelete = (props: string) => {
-    ctx.removeComment("12");
+    ctx.removeComment(props);
+    ctx.updateComments("onWait");
   };
 
   const handleApprove = (props: string) => {
-    ctx.approveComment("-NG12_oEZneUflBCvR7t");
+    ctx.approveComment(props);
+    ctx.updateComments("onWait");
+    ctx.updateComments("approved");
   };
 
   return (
@@ -44,19 +33,20 @@ const CommentsList = (props: Props) => {
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 8, sm: 8, md: 16 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {Array.from(list).map((item, index) => (
+        {Array.from(props.comments).map((item, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
             <div className={`${classes.card} ${gClasses.card}`}>
-              <h5>#{list.length - index}</h5>
-              <p>{item}</p>
+              <h5>#{props.comments.length - index}</h5>
+              <p>{item.comment}</p>
+
               {Boolean(props.admin) && (
                 <div className={classes.buttons}>
                   <IconButton
                     aria-label="delete"
                     onClick={() => {
-                      handleDelete("12");
+                      handleDelete(item.id);
                     }}
                   >
                     <DeleteIcon />
