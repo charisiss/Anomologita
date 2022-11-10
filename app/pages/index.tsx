@@ -11,7 +11,7 @@ import CommentContext from "../store/Comments-Context";
 const Home = () => {
   const [openAddComment, setOpen] = useState(false);
   const [comments, setComments] = useState<commentType[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // FALSE
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // FALSE
   const ctx = useContext(CommentContext);
 
   useEffect(() => {
@@ -19,6 +19,8 @@ const Home = () => {
     ctx.updateComments("onWait");
     ctx.updateComments("approved");
   }, [ctx.onWaitComments]);
+
+  console.log(window.localStorage.getItem("isLoggedIn"));
 
   return (
     <div>
@@ -63,10 +65,11 @@ const Home = () => {
 
       <footer className={classes.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://infinitygreece.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
+          Web Design/Develop Team <br />
           Powered by InfinityGreece
         </a>
       </footer>
