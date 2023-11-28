@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import HeartIcon from "./HeartIcon"; // Adjust the import path based on your project structure
+import HeartIcon from "./HeartIcon";
 
 const TestimonialComponent = ({ title, likeCount }) => {
   const [filled, setFilled] = useState(false);
