@@ -1,19 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/Home'; // Import your other components
-import NewPage from './pages/NewPage';
-import DisplayPage from './pages/DisplayPage';
-import CompletedAnomologitaPage from './pages/CompletedAnomologitaPage';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AddNew from "./pages/AddNew";
+import ComingSoon from "./pages/ComingSoon";
+import Display from "./pages/DisplayPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/newpage" element={<NewPage />} />
-        <Route path="/admin" element={<DisplayPage />} />
-        <Route path="/anomologita" element={<CompletedAnomologitaPage />} />
-        {/* other routes */}
+        <Route path="/" element={<ComingSoon />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/add" element={<AddNew />} />
+        <Route path="/show" element={<Display />} />
       </Routes>
     </Router>
   );

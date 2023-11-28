@@ -1,7 +1,7 @@
 import Wrapper from "../components/Layout/Wrapper";
 import TestimonialComponent from "../components/TestimonialComponent";
 
-export default function DisplayPage() {
+export default function ShowPage() {
   return (
     <Wrapper>
       <div className="flex flex-col justify-center items-start w-full h-[87vh] px-5 gap-5">
