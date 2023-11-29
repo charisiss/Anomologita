@@ -6,6 +6,7 @@ import ComingSoon from "./pages/ComingSoon";
 import Display from "./pages/DisplayPage";
 import AdminPage from "./pages/AdminPage";
 import ShowPage from "./pages/ShowPage";
+import CompletedAnomologitaPage from "./pages/CompletedAnomologitaPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/show" element={<ShowPage />} />
         <Route path="/display" element={<Display />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/test" element={<CompletedAnomologitaPage />} />
       </Routes>
     </Router>
   );

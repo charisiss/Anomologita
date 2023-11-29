@@ -1,7 +1,29 @@
+import { useState, useEffect } from "react";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
 import Wrapper from "../components/Layout/Wrapper";
 import MessageComponent from "../components/MessageComponent";
 
 export default function ShowPage() {
+  const [completedItems, setCompletedItems] = useState([]);
+
+  useEffect(() => {
+    // Set up a real-time listener using onSnapshot
+    const q = query(
+      collection(db, "anomologita"),
+      where("completed", "==", true)
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const items = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCompletedItems(items);
+    });
+
+    // Detach the listener when the component is unmounted
+    return unsubscribe;
+  }, []);
   return (
     <Wrapper hideHeaderMenu="true">
       <div className="flex flex-col items-center w-full h-[87vh] gap-10 relative">
@@ -36,42 +58,10 @@ export default function ShowPage() {
           </div>
         </div>
         <div className="grid grid-cols-3 grid-rows-3 gap-10 h-4/5 p-10">
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
-          <MessageComponent
-            title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
-            likeCount={142}
-          />
+          {completedItems.map((item) => (
+            // eslint-disable-next-line react/jsx-key
+            <MessageComponent title={item.field1} likeCount={item.field1} />
+          ))}
         </div>
       </div>
     </Wrapper>

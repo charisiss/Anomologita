@@ -11,6 +11,20 @@ export default function Wrapper({ hideHeaderMenu, children }) {
   return (
     <>
       <Header hideHeaderMenu={hideHeaderMenu} />
+      <div className="absolute bottom-0 left-0 bg-black z-30 p-5 flex flex-col">
+        <a className="text-white" href="/add">
+          ADD
+        </a>
+        <a className="text-white" href="/show">
+          SHOW
+        </a>
+        <a className="text-white" href="/display">
+          DISPLAY
+        </a>
+        <a className="text-white" href="/admin">
+          ADMIN
+        </a>
+      </div>
       <div className="bg-[url('/basic-bg.jpg')] bg-no-repeat bg-cover bg-center font-manrope">
         <div className="backdrop-blur-sm bg-black/40 h-[87vh] w-screen flex flex-col overflow-hidden relative">
           <div className="bg-transparent absolute w-screen h-screen">

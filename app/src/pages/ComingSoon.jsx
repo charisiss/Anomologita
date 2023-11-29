@@ -11,7 +11,7 @@ export default function ComingSoon() {
         </div>
         <div className="bg-[#f0f0f0] rounded-full rounded-tl-none shadow-inner">
           <h1 className="text-lg font-extrabold text-red p-8 text-left">
-            Το πιο hot χριστουγεννιάτικο πάρτυ της πόλης είναι γεγονός
+            Το πιο hot Χριστουγεννιάτικο πάρτυ της πόλης είναι γεγονός
           </h1>
         </div>
 
