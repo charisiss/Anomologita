@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "./HeartIcon";
 
-const TestimonialComponent = ({ title, likeCount }) => {
+const TestimonialComponent = ({ title, likeCount, color, stroke }) => {
   const [filled, setFilled] = useState(false);
   const fillTimeoutRef = useRef(null);
 
@@ -26,11 +26,23 @@ const TestimonialComponent = ({ title, likeCount }) => {
   }, []);
 
   return (
-    <div className="bg-[#f0f0f0] rounded-full rounded-bl-none text-start shadow-inner flex justify-center items-center">
-      <h1 className="text-lg font-extrabold text-red p-8 uppercase">{title}</h1>
+    <div
+      className={`bg-${
+        color ? color : "white"
+      } rounded-full rounded-br-none text-start shadow-inner flex justify-between items-center border border-white z-10`}
+    >
+      <h2
+        className={`text-lg font-extrabold text-${
+          color ? "white" : "red"
+        } p-8 uppercase`}
+      >
+        {title}
+      </h2>
       <div className="flex flex-col justify-center pr-5">
-        <HeartIcon filled={filled} onClick={handleHeartClick} />
-        <p className="text-red text-center">{likeCount}</p>
+        <HeartIcon filled={filled} onClick={handleHeartClick} stroke={stroke} />
+        <p className={`text-${color ? "white" : "red"} text-center`}>
+          {likeCount}
+        </p>
       </div>
     </div>
   );
