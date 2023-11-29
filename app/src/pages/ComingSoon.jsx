@@ -2,7 +2,7 @@ import Wrapper from "../components/Layout/Wrapper";
 
 export default function ComingSoon() {
   return (
-    <Wrapper>
+    <Wrapper hideHeaderMenu="true">
       <div className="flex flex-col justify-center items-start w-full h-[85vh] px-5 gap-2">
         <div className="bg-[#f0f0f0] rounded-full rounded-bl-none shadow-inner">
           <h1 className="text-lg font-extrabold text-red p-8">
