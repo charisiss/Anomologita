@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../services/firebaseConfig.js";
 import Wrapper from "../components/Layout/Wrapper";
 import MessageComponent from "../components/MessageComponent";
@@ -38,10 +45,12 @@ function AdminPage() {
           completed: value,
         });
         if (value === null) {
-          setData(prevData => prevData.filter(item => item.docId !== docId));
+          setData((prevData) =>
+            prevData.filter((item) => item.docId !== docId)
+          );
         } else {
-          setData(prevData =>
-            prevData.map(item =>
+          setData((prevData) =>
+            prevData.map((item) =>
               item.docId === docId ? { ...item, completed: value } : item
             )
           );
@@ -103,6 +112,7 @@ function AdminPage() {
                 onClick={() => updateBooleanValue(item.docId, true)}
               >
                 ΕΓΚΡΙΣΗ
+              </button>
             </div>
           ))
         )}
