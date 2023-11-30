@@ -60,7 +60,6 @@ function AdminPage() {
     }
   };
 
-  console.log(data);
   return (
     <Wrapper>
       <div>
@@ -87,19 +86,20 @@ function AdminPage() {
         ) : (
           data.map((item) => (
             <div key={item.docId}>
-              <div>
-                <MessageComponent
-                  title={item.field1}
-                  likeCount={item.field3}
-                  color={"red"}
-                  stroke={"white"}
-                />
+              <div className="flex flex-col justify-center items-center py-2">
+                <MessageComponent title={item.field1} likeCount={item.field3} />
               </div>
-              <button onClick={() => updateBooleanValue(item.docId, true)}>
-                ΕΓΚΡΙΣΗ
-              </button>
-              <button onClick={() => updateBooleanValue(item.docId, false)}>
+              <button
+                className="bg-red text-white mr-5 hover:border-none"
+                onClick={() => updateBooleanValue(item.docId, false)}
+              >
                 ΑΠΟΡΡΙΨΗ
+              </button>
+              <button
+                className="bg-white text-red hover:border-none hover:grow"
+                onClick={() => updateBooleanValue(item.docId, true)}
+              >
+                ΕΓΚΡΙΣΗ
               </button>
             </div>
           ))
