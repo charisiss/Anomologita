@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
-const HeartIcon = ({ filled, onClick }) => {
+const HeartIcon = ({ filled, onClick, stroke }) => {
   const [fadeOut, setFadeOut] = useState(false);
   const fadeOutRef = useRef(null);
 
@@ -32,7 +32,7 @@ const HeartIcon = ({ filled, onClick }) => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 47.5 47.5"
         fill={filled ? "#900009" : "none"}
-        stroke="#900009"
+        stroke={stroke ? stroke : "#900009"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

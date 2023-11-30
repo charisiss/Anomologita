@@ -3,9 +3,6 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      backgroundImage: {
-        basic: "url('basic-bg.webp')",
-      },
       colors: {
         red: "#900009",
       },

@@ -2,8 +2,7 @@ import Wrapper from "../components/Layout/Wrapper";
 
 export default function ComingSoon() {
   return (
-    <Wrapper>
-      {/* MAIN */}
+    <Wrapper hideHeaderMenu="true">
       <div className="flex flex-col justify-center items-start w-full h-[85vh] px-5 gap-2">
         <div className="bg-[#f0f0f0] rounded-full rounded-bl-none shadow-inner">
           <h1 className="text-lg font-extrabold text-red p-8">
@@ -12,7 +11,7 @@ export default function ComingSoon() {
         </div>
         <div className="bg-[#f0f0f0] rounded-full rounded-tl-none shadow-inner">
           <h1 className="text-lg font-extrabold text-red p-8 text-left">
-            Το πιο hot χριστουγεννιάτικο πάρτυ της πόλης είναι γεγονός
+            Το πιο hot Χριστουγεννιάτικο πάρτυ της πόλης είναι γεγονός
           </h1>
         </div>
 
