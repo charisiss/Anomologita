@@ -49,11 +49,14 @@ export default function AddNew() {
       console.error("Error adding document: ", error);
     }
   };
-  
+
   return (
     <Wrapper>
-      <div className="flex flex-col justify-center items-start w-full h-[85vh] px-5 gap-10">
-        <form onSubmit={handleSubmit} className="bg-[#f0f0f0] rounded-xl w-full h-auto flex flex-col justify-around border-2 border-[#1a1a1a]">
+      <div className="flex flex-col justify-center items-center w-full h-[85vh] px-5 gap-10">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#f0f0f0] rounded-xl rounded-b-2xl w-full lg:w-auto h-auto flex flex-col justify-around "
+        >
           <h1 className="text-lg font-extrabold text-black uppercase my-5 px-5">
             Γραψε το ανομολογητο σου
           </h1>
@@ -72,7 +75,10 @@ export default function AddNew() {
             className="bg-[#d1d5db] rounded-md w-4/5 h-12 text-center mb-5 text-black mx-auto"
             placeholder="#Ο Αριθμός Σου"
           />
-          <button type="submit" className="bg-[#1a1a1a] w-full rounded-t-none rounded-b-xl px-3 m-[-1px] py-2 text-white">
+          <button
+            type="submit"
+            className="bg-[#1a1a1a] w-full rounded-t-none rounded-b-xl mb-0 px-3 py-2 text-white ring-0 hover:ring-0 hover:border-[#1a1a1a]"
+          >
             ΑΠΟΣΤΟΛΗ
           </button>
         </form>
