@@ -1,7 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "./HeartIcon";
 
-const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
+const MessageComponent = ({
+  title,
+  likeCount,
+  color,
+  stroke,
+  onLike,
+  customClass,
+}) => {
   const [likes, setLikes] = useState(likeCount);
   const [filled, setFilled] = useState(false);
   const fillTimeoutRef = useRef(null);
@@ -30,9 +37,9 @@ const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
 
   return (
     <div
-      className={`bg-${
-        color ? color : "white"
-      } w-1/2 rounded-full rounded-bl-none text-start shadow-inner flex justify-between items-center border border-white`}
+      className={`bg-${color ? color : "white"} ${
+        likes == undefined ? "w-1/2" : "w-full"
+      }  rounded-full rounded-bl-none text-start shadow-inner flex justify-between items-center border border-white ${customClass}`}
     >
       <h2
         className={`text-lg font-extrabold text-${
@@ -41,10 +48,18 @@ const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
       >
         {title}
       </h2>
-      <div className="flex flex-col justify-center pr-5 mb-[-18px]">
-        <HeartIcon filled={filled} onClick={handleHeartClick} stroke={stroke} />
-        <p className={`text-${color ? "white" : "red"} text-center`}>{likes}</p>
-      </div>
+      {likes != undefined ? (
+        <div className="flex flex-col justify-center pr-5 mb-[-18px]">
+          <HeartIcon
+            filled={filled}
+            onClick={handleHeartClick}
+            stroke={stroke}
+          />
+          <p className={`text-${color ? "white" : "red"} text-center`}>
+            {likes}
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 };

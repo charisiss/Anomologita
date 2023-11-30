@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { collection, query, where, onSnapshot, doc, updateDoc, increment } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
 import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
 import Wrapper from "../components/Layout/Wrapper";
 import MessageComponent from "../components/MessageComponent";
@@ -36,14 +44,15 @@ export default function ShowPage() {
     // Increment the 'likes' field of the document
     const docRef = doc(db, "anomologita", docId);
     updateDoc(docRef, {
-      likes: increment(1)
-    }).then(() => {
-      console.log("Like count incremented in Firestore");
-    }).catch(error => {
-      console.error("Error updating likes: ", error);
-    });
+      likes: increment(1),
+    })
+      .then(() => {
+        console.log("Like count incremented in Firestore");
+      })
+      .catch((error) => {
+        console.error("Error updating likes: ", error);
+      });
   };
-
 
   return (
     <Wrapper hideHeaderMenu="true">
@@ -53,25 +62,26 @@ export default function ShowPage() {
 
           <img className="w-44 rounded-tl-xl" src="/qr-red.png"></img>
         </div>
-        <div className="p-10">
-                <h2 className="text-center text-5xl font-bold pb-3 text-white shadow-lg">
-                  TOP 3
-                </h2>
-                <div className="grid grid-cols-3 gap-5">
-                  {topThreeLiked.map((item) => (
-                    <MessageComponent
-                      key={item.id}
-                      title={item.field1}
-                      likeCount={item.likes}
-                      color={"red"}
-                      stroke={"white"}
-                      onLike={() => handleLike(item.id)}
-                    />
-                  ))}
-                </div>
-              </div>
-          <div className="grid grid-cols-3 grid-rows-3 gap-10 h-4/5 p-10">
-          {completedItems.map((item, index) => (
+        <div className="p-10 w-full">
+          <h2 className="text-center text-5xl font-bold pb-3 text-white shadow-lg">
+            TOP 3
+          </h2>
+          <div className="grid grid-cols-3 gap-5">
+            {topThreeLiked.map((item, index) => (
+              <MessageComponent
+                key={item.id}
+                title={item.field1}
+                likeCount={item.likes}
+                color={"red"}
+                stroke={"white"}
+                onLike={() => handleLike(item.id)}
+                customClass={index != 1 ? "" : "drop-shadow-2xl"}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="grid grid-cols-3 grid-rows-3 gap-10 h-4/5 p-10 w-4/5">
+          {completedItems.slice(-9).map((item) => (
             <MessageComponent
               key={item.id}
               title={item.field1}
