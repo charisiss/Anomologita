@@ -30,7 +30,7 @@ export default function ShowPage() {
         <div className="absolute bottom-0 right-0 z-20">
           <p className="text-xl">SCAN TO WRITE</p>
 
-          <img className="w-44 rounded-tl-xl" src="/qr.png"></img>
+          <img className="w-44 rounded-tl-xl" src="/qr-red.png"></img>
         </div>
         <div className="p-10">
           <h2 className="text-center text-5xl font-bold pb-3 text-white shadow-lg">

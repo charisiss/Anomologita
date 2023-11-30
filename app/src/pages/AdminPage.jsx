@@ -67,7 +67,9 @@ function AdminPage() {
         <h1>ADMIN</h1>
         {isLocked ? (
           <div className="w-full h-[50vh] flex flex-col gap-2 justify-center items-center">
-            <label htmlFor="password">ΚΩΔΙΚΟΣ:</label>
+            <label htmlFor="password" className="text-2xl">
+              ΚΩΔΙΚΟΣ:
+            </label>
             <input
               type="password"
               id="password"
