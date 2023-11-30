@@ -1,66 +1,68 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
+import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { db } from "../services/firebaseConfig.js";
 import Wrapper from "../components/Layout/Wrapper";
 import MessageComponent from "../components/MessageComponent";
 
 function AdminPage() {
   const [data, setData] = useState([]);
-  const [isLocked, setIsLocked] = useState(true); // Initially locked
+  const [isLocked, setIsLocked] = useState(true);
   const [password, setPassword] = useState("");
   const correctPassword = "demo";
 
-  // Fetch data from Firestore
   useEffect(() => {
-    const fetchData = async () => {
-      // Check if the page is not locked before fetching data
-      if (!isLocked) {
-        const querySnapshot = await getDocs(collection(db, "anomologita"));
+    if (!isLocked) {
+      const q = query(
+        collection(db, "anomologita"),
+        where("completed", "!=", null)
+      );
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const dataList = querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           docId: doc.id,
         }));
         setData(dataList);
-      }
-    };
+      });
 
-    fetchData();
+      return () => unsubscribe();
+    }
   }, [isLocked]);
 
-  // Function to update the boolean value
   const updateBooleanValue = async (docId, value) => {
-    // Check if the page is not locked before updating data
     if (!isLocked) {
       const docRef = doc(db, "anomologita", docId);
       try {
-        setIsLocked(true); // Lock the page during the update
+        setIsLocked(true);
         await updateDoc(docRef, {
           completed: value,
         });
-        const updatedData = data.map((item) => {
-          if (item.docId === docId) {
-            return { ...item, completed: value };
-          }
-          return item;
-        });
-        setData(updatedData);
+        if (value === null) {
+          setData(prevData => prevData.filter(item => item.docId !== docId));
+        } else {
+          setData(prevData =>
+            prevData.map(item =>
+              item.docId === docId ? { ...item, completed: value } : item
+            )
+          );
+        }
       } catch (error) {
         console.error("Error updating document:", error);
       } finally {
-        setIsLocked(false); // Unlock the page after the update
+        setIsLocked(false);
       }
     }
   };
 
-  const handlePasswordSubmit = () => {
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
     if (password === correctPassword) {
-      setIsLocked(false); // Unlock the page if the password is correct
+      setIsLocked(false);
     } else {
       alert("Incorrect password. Please try again.");
     }
   };
 
-  console.log(data);
   return (
     <Wrapper>
       <div>
@@ -86,21 +88,27 @@ function AdminPage() {
           </div>
         ) : (
           data.map((item) => (
-            <div key={item.docId}>
-              <div>
-                <MessageComponent
-                  title={item.field1}
-                  likeCount={item.field3}
-                  color={"red"}
-                  stroke={"white"}
-                />
+            <div key={item.docId} className="flex flex-col items-center mb-4">
+              <MessageComponent
+                title={item.field1}
+                likeCount={item.likes}
+                color={"red"}
+                stroke={"white"}
+              />
+              <div className="flex justify-between w-full max-w-xs mt-2">
+                <button 
+                  onClick={() => updateBooleanValue(item.docId, true)}
+                  className="bg-green-500 text-white p-2 rounded"
+                >
+                  ΕΓΚΡΙΣΗ
+                </button>
+                <button 
+                  onClick={() => updateBooleanValue(item.docId, null)}
+                  className="bg-red-500 text-white p-2 rounded"
+                >
+                  ΑΠΟΡΡΙΨΗ
+                </button>
               </div>
-              <button onClick={() => updateBooleanValue(item.docId, true)}>
-                ΕΓΚΡΙΣΗ
-              </button>
-              <button onClick={() => updateBooleanValue(item.docId, false)}>
-                ΑΠΟΡΡΙΨΗ
-              </button>
             </div>
           ))
         )}
