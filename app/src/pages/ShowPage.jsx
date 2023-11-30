@@ -60,7 +60,7 @@ export default function ShowPage() {
         <div className="grid grid-cols-3 grid-rows-3 gap-10 h-4/5 p-10">
           {completedItems.map((item) => (
             // eslint-disable-next-line react/jsx-key
-            <MessageComponent title={item.field1} likeCount={item.field1} />
+            <MessageComponent title={item.field1} likeCount={item.likes} />
           ))}
         </div>
       </div>
