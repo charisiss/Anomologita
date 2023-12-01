@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "./HeartIcon";
 
-const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
+const MessageComponent = ({ title, likeCount, color, stroke, onLike, refreshLikes }) => {
   const [likes, setLikes] = useState(likeCount);
   const [filled, setFilled] = useState(false);
   const fillTimeoutRef = useRef(null);
@@ -19,6 +19,11 @@ const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
       setFilled(false);
     }, 500);
   };
+
+    // Effect to update local like count when the prop changes
+    useEffect(() => {
+      setLikes(likeCount);
+    }, [likeCount]);
 
   useEffect(() => {
     return () => {
