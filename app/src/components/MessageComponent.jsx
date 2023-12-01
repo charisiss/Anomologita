@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "./HeartIcon";
 
-const MessageComponent = ({ title, likeCount, color, stroke, onLike, refreshLikes }) => {
+const MessageComponent = ({ title, likeCount, color, stroke, onLike }) => {
   const [likes, setLikes] = useState(likeCount);
   const [filled, setFilled] = useState(false);
   const fillTimeoutRef = useRef(null);
