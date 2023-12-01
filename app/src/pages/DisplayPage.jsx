@@ -43,22 +43,6 @@ export default function DisplayPage() {
   return (
     <Wrapper>
       <div className="flex flex-col justify-center items-start w-full h-[87vh] px-5 gap-5">
-        {data.map((item) => (
-          <div key={item.docId}>
-            {" "}
-            {/* Use the correct key */}
-            <div>
-              {item.field1} - {item.field2} - Completed:{" "}
-              {item.completed.toString()}
-            </div>
-            <button onClick={() => updateBooleanValue(item.docId, true)}>
-              Set True
-            </button>
-            <button onClick={() => updateBooleanValue(item.docId, false)}>
-              Set False
-            </button>
-          </div>
-        ))}
         <MessageComponent title="WEB DD MONO" likeCount={142} />
         <MessageComponent
           title="ΠΟΛΥ ΚΑΛΟ ΑΥΤΟ ΤΟ REDXMAS ΡΕ ΠΑΙΔΙΑ"
