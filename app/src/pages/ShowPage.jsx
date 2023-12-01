@@ -4,11 +4,8 @@ import {
   query,
   where,
   onSnapshot,
-  doc,
-  updateDoc,
-  increment,
 } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
+import { db } from "../services/firebaseConfig.js";
 import Wrapper from "../components/Layout/Wrapper";
 import MessageComponent from "../components/MessageComponent";
 
@@ -17,21 +14,24 @@ export default function ShowPage() {
   const [topThreeLiked, setTopThreeLiked] = useState([]);
 
   useEffect(() => {
-    // Set up a real-time listener for completed items
     const q = query(
       collection(db, "anomologita"),
       where("completed", "==", true)
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const items = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const items = querySnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => b.ticket - a.ticket) // Sort by ticket number
+        .slice(0, 9); // Take only the top 9 items
+
       setCompletedItems(items);
     });
 
-    return unsubscribe; // Detach the listener when the component is unmounted
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -46,12 +46,24 @@ export default function ShowPage() {
     updateDoc(docRef, {
       likes: increment(1),
     })
-      .then(() => {
-        console.log("Like count incremented in Firestore");
-      })
-      .catch((error) => {
-        console.error("Error updating likes: ", error);
-      });
+    .then(() => {
+      console.log("Like count incremented in Firestore");
+      // After updating the likes in Firestore, update the local state to reflect the change
+      setCompletedItems((prevItems) => 
+        prevItems.map((item) => 
+          item.id === docId ? { ...item, likes: item.likes + 1 } : item
+        )
+      );
+      // Also update the top three liked items
+      setTopThreeLiked((prevItems) => 
+        prevItems.map((item) => 
+          item.id === docId ? { ...item, likes: item.likes + 1 } : item
+        )
+      );
+    })
+    .catch((error) => {
+      console.error("Error updating likes: ", error);
+    });
   };
 
   return (
@@ -75,13 +87,13 @@ export default function ShowPage() {
                 color={"red"}
                 stroke={"white"}
                 onLike={() => handleLike(item.id)}
-                customClass={index != 1 ? "" : "drop-shadow-2xl"}
+                customClass={index !== 1 ? "" : "drop-shadow-2xl"}
               />
             ))}
           </div>
         </div>
         <div className="grid grid-cols-3 grid-rows-3 gap-10 h-4/5 p-10 w-4/5">
-          {completedItems.slice(-9).map((item) => (
+          {completedItems.map((item) => (
             <MessageComponent
               key={item.id}
               title={item.field1}
