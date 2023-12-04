@@ -1,6 +1,10 @@
+// import { useState } from "react";
+import ChatBubbleLoading from "../components/ChatBubbleLoading";
 import Wrapper from "../components/Layout/Wrapper";
+import styles from "./ComingSoon.module.css";
 
 export default function ComingSoon() {
+  // const [loading, setLoading] = useState(true);
   return (
     <Wrapper hideHeaderMenu="true">
       <div className="flex flex-col justify-center items-start w-full h-[85vh] px-5 gap-2">
@@ -31,6 +35,18 @@ export default function ComingSoon() {
             Βάλε κάτι κόκκινο και ελα
           </h1>
         </div>
+        <div>heyy</div>
+
+        <div className="bg-white rounded-full rounded-br-none shadow-inner self-end my-5">
+          <div className="flex flex-row gap-2 bg-white h-20 w-28 p-2 items-center justify-center rounded-full">
+            <div className="w-4 h-4 rounded-full bg-red animate-bounce"></div>
+            <div className="w-4 h-4 rounded-full bg-red animate-bounce [animation-delay:-.3s]"></div>
+            <div className="w-4 h-4 rounded-full bg-red animate-bounce [animation-delay:-.5s]"></div>
+          </div>
+        </div>
+        {/* <div className={styles.tail}></div> */}
+
+        {/* <ChatBubbleLoading /> */}
       </div>
     </Wrapper>
   );

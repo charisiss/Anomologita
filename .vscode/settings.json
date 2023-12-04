@@ -1,0 +1,86 @@
+{
+  "debug.node.autoAttach": "on",
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "Front Run",
+          // "commands": ["cd kpi-frontend", "npm run dev"]
+          // "commands": ["cd kpi-frontend", "npm run start:local"]
+          "commands": ["cd app", "npm run dev"]
+        }
+      ]
+    }
+    // {
+    //   "splitTerminals": [
+    //     {
+    //       "type": "node-terminal",
+    //       "request": "launch",
+    //       "name": "Back Bash",
+    //       "commands": ["cd kpi-backend", "npm run debug:local "],
+    //       "processId": "${command:PickProcess}"
+    //     }
+    //   ]
+    // }
+  ],
+  //
+
+  // if
+  // Starting inspector on 127.0.0.1:9229 failed: address already in use
+  // ..API Loading
+  // ◉ API Loaded
+  // Port 5030 is already in use
+
+  // Solution:
+  // npx kill-port 9229
+
+  //p
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // "tailwindCSS.includeLanguages": {
+  //   "plaintext": "javascript"
+  // },
+  // "[typescriptreact]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  //   // "editor.defaultFormatter": "vscode.typescript-language-features"
+  // },
+  "files.trimTrailingWhitespace": true,
+  "vscode-pets.throwBallWithMouse": true,
+  "vscode-pets.theme": "none",
+  "vscode-pets.petSize": "medium",
+  "vscode-pets.petColor": "red",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#c3000c",
+    "activityBar.background": "#c3000c",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#0cbf00",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#c3000c",
+    "statusBar.background": "#900009",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#c3000c",
+    "statusBarItem.remoteBackground": "#900009",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#900009",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#90000999",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#900009",
+  "vscode-pets.position": "panel"
+
+  // "[html]": {
+  //   "editor.defaultFormatter": "vscode.html-language-features"
+  // }
+}
