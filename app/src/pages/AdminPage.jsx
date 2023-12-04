@@ -1,64 +1,123 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../services/firebaseConfig.js";
+import Wrapper from "../components/Layout/Wrapper";
+import MessageComponent from "../components/MessageComponent";
 
 function AdminPage() {
   const [data, setData] = useState([]);
+  const [isLocked, setIsLocked] = useState(true);
+  const [password, setPassword] = useState("");
+  const correctPassword = "demo";
 
-  // Fetch data from Firestore
   useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "anomologita"));
-      const dataList = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        docId: doc.id,
-      })); // Store Firestore document ID in 'docId'
-      setData(dataList);
-    };
+    if (!isLocked) {
+      const q = query(
+        collection(db, "anomologita"),
+        where("completed", "!=", null)
+      );
 
-    fetchData();
-  }, []);
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const dataList = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          docId: doc.id,
+        }));
+        setData(dataList);
+      });
 
-  // Function to update the boolean value
+      return () => unsubscribe();
+    }
+  }, [isLocked]);
+
   const updateBooleanValue = async (docId, value) => {
-    const docRef = doc(db, "anomologita", docId); // Use the correct Firestore document ID to update
-    try {
-      await updateDoc(docRef, {
-        completed: value, // Set 'completed' to the value passed in
-      });
-      // Optimistically update the UI
-      const updatedData = data.map((item) => {
-        if (item.docId === docId) {
-          return { ...item, completed: value };
+    if (!isLocked) {
+      const docRef = doc(db, "anomologita", docId);
+      try {
+        setIsLocked(true);
+        await updateDoc(docRef, {
+          completed: value,
+        });
+        if (value === null) {
+          setData((prevData) =>
+            prevData.filter((item) => item.docId !== docId)
+          );
+        } else {
+          setData((prevData) =>
+            prevData.map((item) =>
+              item.docId === docId ? { ...item, completed: value } : item
+            )
+          );
         }
-        return item;
-      });
-      setData(updatedData);
-    } catch (error) {
-      console.error("Error updating document:", error);
+      } catch (error) {
+        console.error("Error updating document:", error);
+      } finally {
+        setIsLocked(false);
+      }
+    }
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password === correctPassword) {
+      setIsLocked(false);
+    } else {
+      alert("Incorrect password. Please try again.");
     }
   };
 
   return (
-    <div>
-      <h1>Data from Anomologita</h1>
-      {data.map((item) => (
-        <div key={item.docId}>
-          {" "}
-          {/* Use the correct key */}
-          <div>
-            {item.field1} - {item.field2} - Completed:{" "}
-            {item.completed.toString()}
+    <Wrapper>
+      <div>
+        <h1>ADMIN</h1>
+        {isLocked ? (
+          <div className="w-full h-[50vh] flex flex-col gap-2 justify-center items-center">
+            <label htmlFor="password" className="text-2xl">
+              ΚΩΔΙΚΟΣ:
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="bg-white text-red"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              onClick={handlePasswordSubmit}
+              className="bg-white border-4 border-[#1a1a1a] hover:border-[#900009] text-[#1a1a1a]"
+            >
+              Συνδεση
+            </button>
           </div>
-          <button onClick={() => updateBooleanValue(item.docId, true)}>
-            Set True
-          </button>
-          <button onClick={() => updateBooleanValue(item.docId, false)}>
-            Set False
-          </button>
-        </div>
-      ))}
-    </div>
+        ) : (
+          data.map((item) => (
+            <div key={item.docId}>
+              <div className="flex flex-col justify-center items-center py-2">
+                <MessageComponent title={item.field1} likeCount={item.field3} />
+              </div>
+              <button
+                className="bg-red text-white mr-5 hover:border-none"
+                onClick={() => updateBooleanValue(item.docId, false)}
+              >
+                ΑΠΟΡΡΙΨΗ
+              </button>
+              <button
+                className="bg-white text-red hover:border-none hover:grow"
+                onClick={() => updateBooleanValue(item.docId, true)}
+              >
+                ΕΓΚΡΙΣΗ
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+    </Wrapper>
   );
 }
 
