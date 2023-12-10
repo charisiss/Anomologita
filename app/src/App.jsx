@@ -3,7 +3,7 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import HeaderComponent from "./components/Layout/HeaderComponent";
 import Footer from "./components/Layout/Footer";
-// import Header from "./components/Layout/Header";
+import Header from "./components/Layout/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import HomePage from "./pages/HomePage";
 // import AddNew from "./pages/AddNew";
@@ -27,7 +27,7 @@ const App = () => {
     //   </Routes>
     // </Router>
 
-    <div className="relative h-full w-full">
+    <div className="relative flex min-h-screen w-full flex-col">
       <HeaderComponent />
       {/* <Header /> */}
       <Outlet />

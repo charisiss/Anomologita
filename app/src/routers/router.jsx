@@ -10,6 +10,7 @@ import ShowPage from "../pages/ShowPage";
 import DisplayPage from "../pages/DisplayPage";
 import AdminPage from "../pages/AdminPage";
 import App from "../App";
+import CompletedAnomologitaPage from "../pages/CompletedAnomologitaPage";
 
 const NAVIGATION = () => {
   const navigation = [
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminPage />,
+      },
+      {
+        path: "/test",
+        element: <CompletedAnomologitaPage />,
       },
     ],
   },
