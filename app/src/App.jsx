@@ -28,8 +28,8 @@ const App = () => {
     // </Router>
 
     <div className="relative flex min-h-screen w-full flex-col">
-      <HeaderComponent />
-      {/* <Header /> */}
+      {/* <HeaderComponent /> */}
+      <Header />
       <Outlet />
       <Footer />
     </div>

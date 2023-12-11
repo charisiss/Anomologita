@@ -1,8 +1,7 @@
-import { createBrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 // import ErrorPage from "../pages/ErrorPage";
 // import App from "../App";
 import ErrorPage from "../pages/ErrorPage";
-import React from "react";
 import ComingSoon from "../pages/ComingSoon";
 import HomePage from "../pages/HomePage";
 import AddNew from "../pages/AddNew";
@@ -10,7 +9,6 @@ import ShowPage from "../pages/ShowPage";
 import DisplayPage from "../pages/DisplayPage";
 import AdminPage from "../pages/AdminPage";
 import App from "../App";
-import CompletedAnomologitaPage from "../pages/CompletedAnomologitaPage";
 
 const NAVIGATION = () => {
   const navigation = [
@@ -54,6 +52,10 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "/write",
+        element: <AddNew />,
+      },
+      {
         path: "/add",
         element: <AddNew />,
       },
@@ -62,16 +64,12 @@ export const router = createBrowserRouter([
         element: <ShowPage />,
       },
       {
-        path: "/display",
+        path: "/read",
         element: <DisplayPage />,
       },
       {
         path: "/admin",
         element: <AdminPage />,
-      },
-      {
-        path: "/test",
-        element: <CompletedAnomologitaPage />,
       },
     ],
   },
