@@ -75,7 +75,7 @@ function AdminPage() {
   return (
     <Wrapper>
       <div>
-        <h1>ADMIN</h1>
+        <h1 className="text-center">ADMIN</h1>
         {isLocked ? (
           <div className="w-full h-[50vh] flex flex-col gap-2 justify-center items-center">
             <label htmlFor="password" className="text-2xl">
@@ -101,18 +101,20 @@ function AdminPage() {
               <div className="flex flex-col justify-center items-center py-2">
                 <MessageComponent title={item.field1} likeCount={item.field3} />
               </div>
-              <button
-                className="bg-red text-white mr-5 hover:border-none"
-                onClick={() => updateBooleanValue(item.docId, false)}
-              >
-                ΑΠΟΡΡΙΨΗ
-              </button>
-              <button
-                className="bg-white text-red hover:border-none hover:grow"
-                onClick={() => updateBooleanValue(item.docId, true)}
-              >
-                ΕΓΚΡΙΣΗ
-              </button>
+              <div className="flex justify-center">
+                <button
+                  className="bg-red text-white mr-5 hover:border-none"
+                  onClick={() => updateBooleanValue(item.docId, false)}
+                >
+                  ΑΠΟΡΡΙΨΗ
+                </button>
+                <button
+                  className="bg-white text-red hover:border-none "
+                  onClick={() => updateBooleanValue(item.docId, true)}
+                >
+                  ΕΓΚΡΙΣΗ
+                </button>
+              </div>
             </div>
           ))
         )}
