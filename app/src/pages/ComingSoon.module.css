@@ -14,7 +14,7 @@
   animation: float 1.5s ease-in-out infinite;
 }
 
-.tail {
+/* .tail {
   height: 25px;
   width: 25px;
   background: #e5e5e5;
@@ -33,4 +33,4 @@
     left: -10px;
     bottom: -8px;
   }
-}
+} */
