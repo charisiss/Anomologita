@@ -68,13 +68,13 @@ export default function AddNew() {
             className="bg-[#d1d5db] rounded-md w-4/5 h-12 text-center mb-5 text-black mx-auto"
             placeholder="Γράψε κάτι..."
           />
-          <input
+          {/* <input
             name="field2"
             value={formData.field2}
             onChange={handleChange}
             className="bg-[#d1d5db] rounded-md w-4/5 h-12 text-center mb-5 text-black mx-auto"
             placeholder="#Ο Αριθμός Σου"
-          />
+          /> */}
           <button
             type="submit"
             className="bg-[#1a1a1a] w-full rounded-t-none rounded-b-xl mb-0 px-3 py-2 text-white ring-0 hover:ring-0 hover:border-[#1a1a1a]"
