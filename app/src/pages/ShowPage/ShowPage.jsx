@@ -10,8 +10,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js"; // Import your Firebase config
 import Wrapper from "@components/Layout/Wrapper.jsx";
-import MessagesComponent from "@components/MessagesComponent";
-import MessageComponent from "@components/MessageComponent";
 import ShowCard from "@components/ShowCard";
 
 export default function ShowPage() {
@@ -19,21 +17,24 @@ export default function ShowPage() {
   const [topThreeLiked, setTopThreeLiked] = useState([]);
 
   useEffect(() => {
-    // Set up a real-time listener for completed items
     const q = query(
       collection(db, "anomologita"),
       where("completed", "==", true),
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const items = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const items = querySnapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => b.ticket - a.ticket) // Sort by ticket number
+        .slice(0, 9); // Take only the top 9 items
+
       setCompletedItems(items);
     });
 
-    return unsubscribe; // Detach the listener when the component is unmounted
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -50,6 +51,18 @@ export default function ShowPage() {
     })
       .then(() => {
         console.log("Like count incremented in Firestore");
+        // After updating the likes in Firestore, update the local state to reflect the change
+        setCompletedItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === docId ? { ...item, likes: item.likes + 1 } : item,
+          ),
+        );
+        // Also update the top three liked items
+        setTopThreeLiked((prevItems) =>
+          prevItems.map((item) =>
+            item.id === docId ? { ...item, likes: item.likes + 1 } : item,
+          ),
+        );
       })
       .catch((error) => {
         console.error("Error updating likes: ", error);
@@ -70,14 +83,13 @@ export default function ShowPage() {
             TOP 3
           </h2>
           <div className="grid grid-cols-3 gap-5">
-            {topThreeLiked.map((item, index) => (
-
+            {topThreeLiked.map((item) => (
               <ShowCard
-              key={item.id}
-              message={item.field1}
-              likeCount={item.likes}
-              onLike={() => handleLike(item.id)}
-            />
+                key={item.id}
+                message={item.field1}
+                likeCount={item.likes}
+                onLike={() => handleLike(item.id)}
+              />
 
               // <MessageComponent
               //   key={item.id}

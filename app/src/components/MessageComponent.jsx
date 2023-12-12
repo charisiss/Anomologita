@@ -27,6 +27,11 @@ const MessageComponent = ({
     }, 500);
   };
 
+    // Effect to update local like count when the prop changes
+    useEffect(() => {
+      setLikes(likeCount);
+    }, [likeCount]);
+
   useEffect(() => {
     return () => {
       if (fillTimeoutRef.current) {
