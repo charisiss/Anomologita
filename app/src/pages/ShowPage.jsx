@@ -4,6 +4,9 @@ import {
   query,
   where,
   onSnapshot,
+  doc,
+  updateDoc,
+  increment,
 } from "firebase/firestore";
 import { db } from "../services/firebaseConfig.js";
 import Wrapper from "../components/Layout/Wrapper";
@@ -22,7 +25,7 @@ export default function ShowPage() {
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const items = querySnapshot.docs
-        .map(doc => ({
+        .map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }))
@@ -47,24 +50,24 @@ export default function ShowPage() {
     updateDoc(docRef, {
       likes: increment(1),
     })
-    .then(() => {
-      console.log("Like count incremented in Firestore");
-      // After updating the likes in Firestore, update the local state to reflect the change
-      setCompletedItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === docId ? { ...item, likes: item.likes + 1 } : item
-        )
-      );
-      // Also update the top three liked items
-      setTopThreeLiked((prevItems) =>
-        prevItems.map((item) =>
-          item.id === docId ? { ...item, likes: item.likes + 1 } : item
-        )
-      );
-    })
-    .catch((error) => {
-      console.error("Error updating likes: ", error);
-    });
+      .then(() => {
+        console.log("Like count incremented in Firestore");
+        // After updating the likes in Firestore, update the local state to reflect the change
+        setCompletedItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === docId ? { ...item, likes: item.likes + 1 } : item,
+          ),
+        );
+        // Also update the top three liked items
+        setTopThreeLiked((prevItems) =>
+          prevItems.map((item) =>
+            item.id === docId ? { ...item, likes: item.likes + 1 } : item,
+          ),
+        );
+      })
+      .catch((error) => {
+        console.error("Error updating likes: ", error);
+      });
   };
 
   return (
