@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "@components/HeartIcon";
 
-const MessageComponent = ({
-  title,
+const ShowCard = ({
+  message,
   likeCount,
   color,
   stroke,
@@ -35,21 +35,40 @@ const MessageComponent = ({
     };
   }, []);
 
+  const user = Math.floor(Math.random() * 4) + 1;
+  let username = "Anonymus "
+  switch (user) {
+    case 1:
+      username += "Santa";
+      break;
+    case 2:
+      username += "Reindeer";
+      break;
+    case 3:
+      username += "Elf";
+      break;
+    case 4:
+      username += "Sock";
+      break;
+    }
+
   return (
     <div
       className={`bg-${color ? color : "white"} ${
         likes == undefined ? "w-1/2" : "w-full"
-      }  flex items-center justify-between rounded-full rounded-bl-none border border-white text-start shadow-inner ${customClass}`}
+      }  bg-[#f0f0f0] rounded-xl rounded-b-2xl w-full lg:w-auto h-auto flex flex-col justify-around p-5 ${customClass}`}
     >
-      <h2
-        className={`text-lg font-extrabold text-${
-          color ? "white" : "red"
-        } p-8 uppercase`}
-      >
-        {title}
-      </h2>
-      {likes != undefined ? (
-        <div className="mb-[-18px] flex flex-col justify-center pr-5">
+      <div className="flex items-end justify-between">
+        <div className="flex items-end gap-4">
+          <img className="w-16" src={`/user-${user}.png`} />
+
+          <div className="flex flex-col gap-0">
+            <h2 className="text-black font-extrabold">{username}</h2>
+            <h2 className="text-black leading-3 mb-2">redxmas.gr</h2>
+          </div>
+        </div>
+        {likes != undefined ? (
+        <div className="flex flex-col justify-center">
           <HeartIcon
             filled={filled}
             onClick={handleHeartClick}
@@ -60,8 +79,18 @@ const MessageComponent = ({
           </p>
         </div>
       ) : null}
+      </div>
+
+      <h2
+        className={`text-lg font-extrabold text-black uppercase my-5 text-center text-${
+          color ? "white" : "black"
+        } uppercase`}
+      >
+        {message} 
+      </h2>
+      
     </div>
   );
 };
 
-export default MessageComponent;
+export default ShowCard;

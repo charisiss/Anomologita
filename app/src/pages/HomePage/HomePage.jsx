@@ -1,5 +1,5 @@
-import Wrapper from "../components/Layout/Wrapper";
-import Message from "../components/common/Message";
+import Wrapper from "@components/Layout/Wrapper";
+import Message from "@components/common/Message";
 
 export default function HomePage() {
   return (

@@ -8,10 +8,11 @@ import {
   updateDoc,
   increment,
 } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
-import Wrapper from "../components/Layout/Wrapper";
-import MessageComponent from "../components/MessageComponent";
-import MessagesComponent from "../components/MessagesComponent";
+import { db } from "../../services/firebaseConfig.js"; // Import your Firebase config
+import Wrapper from "@components/Layout/Wrapper.jsx";
+import MessagesComponent from "@components/MessagesComponent";
+import MessageComponent from "@components/MessageComponent";
+import ShowCard from "@components/ShowCard";
 
 export default function ShowPage() {
   const [completedItems, setCompletedItems] = useState([]);
@@ -57,19 +58,26 @@ export default function ShowPage() {
 
   return (
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
-      <div className="relative flex h-[87vh] w-full flex-col items-center gap-10">
+      <div className="relative flex w-full flex-col items-center gap-10">
         <div className="absolute bottom-0 right-0 z-20">
           <p className="text-xl">SCAN TO WRITE</p>
 
           <img className="w-44 rounded-tl-xl" src="/qr-red.png"></img>
         </div>
+
         <div className="w-full p-10">
-          <h2 className="pb-3 text-center text-5xl font-bold text-white shadow-lg">
+          <h2 className="pb-3 text-center text-5xl font-bold text-white ">
             TOP 3
           </h2>
           <div className="grid grid-cols-3 gap-5">
             {topThreeLiked.map((item, index) => (
-              // Yours
+
+              <ShowCard
+              key={item.id}
+              message={item.field1}
+              likeCount={item.likes}
+              onLike={() => handleLike(item.id)}
+            />
 
               // <MessageComponent
               //   key={item.id}
@@ -80,18 +88,6 @@ export default function ShowPage() {
               //   onLike={() => handleLike(item.id)}
               //   customClass={index != 1 ? "" : "drop-shadow-2xl"}
               // />
-
-              // Manos
-              <MessagesComponent
-                type={"send"}
-                key={item.id}
-                title={item.field1}
-                likeCount={item.likes}
-                color={"red"}
-                stroke={"white"}
-                onLike={() => handleLike(item.id)}
-                customClass={index != 1 ? "" : "drop-shadow-2xl"}
-              />
             ))}
           </div>
         </div>
@@ -99,23 +95,22 @@ export default function ShowPage() {
           {completedItems.slice(-9).map((item) => (
             // Yours
 
-            // <MessageComponent
+            <ShowCard
+              key={item.id}
+              message={item.field1}
+              likeCount={item.likes}
+              onLike={() => handleLike(item.id)}
+            />
+
+            // Manos
+            // <showCard
+            //   type={"receive"}
             //   key={item.id}
             //   title={item.field1}
             //   likeCount={item.likes}
             //   onLike={() => handleLike(item.id)}
             //   // ... other props ...
             // />
-
-            // Manos
-            <MessagesComponent
-              type={"receive"}
-              key={item.id}
-              title={item.field1}
-              likeCount={item.likes}
-              onLike={() => handleLike(item.id)}
-              // ... other props ...
-            />
           ))}
         </div>
       </div>
