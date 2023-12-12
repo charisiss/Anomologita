@@ -28,6 +28,22 @@ const NAVIGATION = () => {
 
 export default NAVIGATION;
 
+export const REDXMAS_NAVIGATION = () => {
+  const navigation = [
+    // ...(isAuthenticated
+    //   ? [
+    { name: "ΓΡΑΨΕ", href: "/write" },
+    { name: "ΔΙΑΒΑΣΕ", href: "/read" },
+    // { name: "Show", href: "/show" },
+    // { name: "Display", href: "/display" },
+    // { name: "Admin", href: "/admin" },
+    //   ]
+    // : [{ name: "Welcome", href: LANDING_ROUTE }]),
+  ];
+
+  return navigation;
+};
+
 export const router = createBrowserRouter([
   {
     path: "/",

@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import HeaderComponent from "./components/Layout/HeaderComponent";
 import Footer from "./components/Layout/Footer";
 import Header from "./components/Layout/Header";
@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import CompletedAnomologitaPage from "./pages/CompletedAnomologitaPage";
 
 const App = () => {
+  const location = useLocation();
   return (
     // <Router>
     //   <Routes>
@@ -29,9 +30,9 @@ const App = () => {
 
     <div className="relative flex min-h-screen w-full flex-col">
       {/* <HeaderComponent /> */}
-      <Header />
+      {location.pathname !== "/show" && <Header />}
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
