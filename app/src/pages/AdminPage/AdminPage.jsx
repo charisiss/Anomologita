@@ -7,9 +7,9 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js";
-import Wrapper from "../components/Layout/Wrapper";
-import MessageComponent from "../components/MessageComponent";
+import { db } from "../../services/firebaseConfig.js";
+import Wrapper from "@components/Layout/Wrapper.jsx";
+import MessageComponent from "@components/MessageComponent.jsx";
 
 function AdminPage() {
   const [data, setData] = useState([]);

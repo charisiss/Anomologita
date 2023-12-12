@@ -1,8 +1,6 @@
 // import { useState } from "react";
-import ChatBubbleLoading from "../components/ChatBubbleLoading";
-import Wrapper from "../components/Layout/Wrapper";
-import Message from "../components/common/Message";
-import styles from "./ComingSoon.module.css";
+import Wrapper from "@components/Layout/Wrapper";
+import Message from "@components/common/Message";
 
 export default function ComingSoon() {
   // const [loading, setLoading] = useState(true);

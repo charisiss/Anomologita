@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 // import ErrorPage from "../pages/ErrorPage";
 // import App from "../App";
-import ErrorPage from "../pages/ErrorPage";
-import ComingSoon from "../pages/ComingSoon";
-import HomePage from "../pages/HomePage";
-import AddNew from "../pages/AddNew";
-import ShowPage from "../pages/ShowPage";
-import DisplayPage from "../pages/DisplayPage";
-import AdminPage from "../pages/AdminPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ComingSoon from "../pages/ComingPage/ComingSoon";
+import HomePage from "../pages/HomePage/HomePage";
+import AddNew from "../pages/WritePage/WritePage";
+import ShowPage from "../pages/ShowPage/ShowPage";
+import DisplayPage from "../pages/ReadPage/ReadPage";
+import AdminPage from "../pages/AdminPage/AdminPage";
 import App from "../App";
 
 const NAVIGATION = () => {

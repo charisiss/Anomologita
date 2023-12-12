@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../services/firebaseConfig.js"; // Import your Firebase config
-import Wrapper from "../components/Layout/Wrapper";
-import MessageComponent from "../components/MessageComponent";
+import { db } from "../../services/firebaseConfig.js"; // Import your Firebase config
+import Wrapper from "@components/Layout/Wrapper.jsx";
+import MessageComponent from "@components/MessageComponent.jsx";
 
 export default function DisplayPage() {
   const [data, setData] = useState([]);
