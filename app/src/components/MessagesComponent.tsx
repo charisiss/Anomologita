@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import HeartIcon from "./HeartIcon";
+import React from "react";
+import Message from "./common/Message";
 
-const MessageComponent = ({
+const MessagesComponent = ({
+  type,
   title,
   likeCount,
   color,
@@ -27,11 +30,6 @@ const MessageComponent = ({
     }, 500);
   };
 
-    // Effect to update local like count when the prop changes
-    useEffect(() => {
-      setLikes(likeCount);
-    }, [likeCount]);
-
   useEffect(() => {
     return () => {
       if (fillTimeoutRef.current) {
@@ -41,32 +39,30 @@ const MessageComponent = ({
   }, []);
 
   return (
-    <div
-      className={`bg-${color ? color : "white"} ${
+    <Message
+      type={type}
+      tail={true}
+      className={`${
         likes == undefined ? "w-1/2" : "w-full"
       }  flex items-center justify-between rounded-full rounded-bl-none border border-white text-start shadow-inner ${customClass}`}
     >
-      <h2
-        className={`text-lg font-extrabold text-${
-          color ? "white" : "red"
-        } p-8 uppercase`}
-      >
-        {title}
-      </h2>
-      {likes != undefined ? (
-        <div className="mb-[-18px] flex flex-col justify-center pr-5">
-          <HeartIcon
-            filled={filled}
-            onClick={handleHeartClick}
-            stroke={stroke}
-          />
-          <p className={`text-${color ? "white" : "red"} text-center`}>
-            {likes}
-          </p>
-        </div>
-      ) : null}
-    </div>
+      <div className="flex justify-between gap-2">
+        <span className={`text-lg font-extrabold uppercase`}>{title}</span>
+        {likes != undefined ? (
+          <div className=" flex flex-col justify-center">
+            <HeartIcon
+              filled={filled}
+              onClick={handleHeartClick}
+              stroke={stroke}
+            />
+            <p className={`text-${color ? "white" : "red"} text-center`}>
+              {likes}
+            </p>
+          </div>
+        ) : null}
+      </div>
+    </Message>
   );
 };
 
-export default MessageComponent;
+export default MessagesComponent;

@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         red: "#900009",
+        redHover: "#750008",
       },
       fontFamily: {
         manrope: "Manrope",
