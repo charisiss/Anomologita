@@ -69,7 +69,7 @@ export default function ShowPage() {
 
   return (
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
-      <div className="relative flex h-[87vh] w-full flex-col items-center gap-10">
+      <div className="relative flex w-full flex-col items-center gap-10">
         <div className="absolute bottom-0 right-0 z-20">
           <p className="text-xl">SCAN TO WRITE</p>
 
