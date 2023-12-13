@@ -14,6 +14,7 @@ import MessageComponent from "@components/MessageComponent.jsx";
 function AdminPage() {
   const [data, setData] = useState([]);
   const [isLocked, setIsLocked] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false); // New state for update status
   const [password, setPassword] = useState("");
   const correctPassword = "demo";
 
@@ -21,7 +22,7 @@ function AdminPage() {
     if (!isLocked) {
       const q = query(
         collection(db, "anomologita"),
-        where("completed", "!=", null)
+        where("completed", "==", false) // Fetch items where completed is false
       );
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -40,25 +41,15 @@ function AdminPage() {
     if (!isLocked) {
       const docRef = doc(db, "anomologita", docId);
       try {
-        setIsLocked(true);
+        setIsUpdating(true); // Use isUpdating state here
         await updateDoc(docRef, {
           completed: value,
         });
-        if (value === null) {
-          setData((prevData) =>
-            prevData.filter((item) => item.docId !== docId)
-          );
-        } else {
-          setData((prevData) =>
-            prevData.map((item) =>
-              item.docId === docId ? { ...item, completed: value } : item
-            )
-          );
-        }
+        // No need to manually update data, as onSnapshot will handle this
       } catch (error) {
         console.error("Error updating document:", error);
       } finally {
-        setIsLocked(false);
+        setIsUpdating(false); // Reset isUpdating state here
       }
     }
   };
@@ -76,7 +67,7 @@ function AdminPage() {
     <Wrapper>
       <div>
         <h1 className="text-center">ADMIN</h1>
-        {isLocked ? (
+        {isLocked && !isUpdating ? (
           <div className="w-full h-[50vh] flex flex-col gap-2 justify-center items-center">
             <label htmlFor="password" className="text-2xl">
               ΚΩΔΙΚΟΣ:
@@ -104,7 +95,7 @@ function AdminPage() {
               <div className="flex justify-center">
                 <button
                   className="bg-red text-white mr-5 hover:border-none"
-                  onClick={() => updateBooleanValue(item.docId, false)}
+                  onClick={() => updateBooleanValue(item.docId, null)}
                 >
                   ΑΠΟΡΡΙΨΗ
                 </button>
