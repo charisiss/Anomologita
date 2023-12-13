@@ -34,7 +34,7 @@ export default function AddNew() {
     const dataToSubmit = {
       ...formData,
       ticket: ticketNumber, // Use the state ticket number
-      completed: true, // Add a boolean field set to false
+      completed: false, // Add a boolean field set to false
       likes: 0, // Initialize 'likes' with default value 0
     };
 
