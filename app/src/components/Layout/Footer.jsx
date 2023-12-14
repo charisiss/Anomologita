@@ -1,13 +1,13 @@
 export default function Footer() {
   return (
-    <div className=" w-full bg-[#430004]">
+    <div className="w-full bg-[#430004]">
       <div className="flex items-center justify-center">
         <p className="mx-4 hidden text-sm text-white xl:block">
           Created by InfinityGreece Web Team &#169; 2023
         </p>
       </div>
       <div className="text-center sm:text-left xl:hidden">
-        <p className="text-sm text-white">
+        <p className="text-center text-sm text-white">
           Created by InfinityGreece Web Team &#169; 2023
         </p>
       </div>

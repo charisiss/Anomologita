@@ -4,7 +4,7 @@ import { REDXMAS_NAVIGATION } from "../../routers/router";
 
 const Header = () => {
   return (
-    <div className="absolute left-0 top-0 z-20 w-full bg-white">
+    <div className="z-20 w-full bg-white">
       <div className="mx-auto h-16 max-w-7xl px-2">
         <div className={`flex h-full w-full justify-between`}>
           <div className="flex gap-2">

@@ -29,7 +29,7 @@ export default function ReadPage() {
 
   return (
     <Wrapper>
-      <div className="flex h-[87vh] w-full flex-col items-start justify-center gap-5 px-5">
+      <div className="flex w-full flex-col items-start justify-center gap-5 px-5">
         {data.map((item) => (
           <MessageComponent
             key={item.docId}

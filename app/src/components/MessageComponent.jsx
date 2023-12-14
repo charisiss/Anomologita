@@ -27,10 +27,10 @@ const MessageComponent = ({
     }, 500);
   };
 
-    // Effect to update local like count when the prop changes
-    useEffect(() => {
-      setLikes(likeCount);
-    }, [likeCount]);
+  // Effect to update local like count when the prop changes
+  useEffect(() => {
+    setLikes(likeCount);
+  }, [likeCount]);
 
   useEffect(() => {
     return () => {

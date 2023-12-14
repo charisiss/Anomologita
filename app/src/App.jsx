@@ -10,6 +10,7 @@ const App = () => {
       {/* <HeaderComponent /> */}
       {location.pathname !== "/show" && <Header />}
       <Outlet />
+      {location.pathname !== "/show" && <Footer />}
       {/* <Footer /> */}
     </div>
   );
