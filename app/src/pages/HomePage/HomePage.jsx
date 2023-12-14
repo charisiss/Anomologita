@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <Wrapper>
       {/* <div className="flex flex-col justify-center items-start w-full h-[87vh] px-5 gap-10"> */}
-      <div className="flex h-full w-full flex-col items-start justify-center gap-2 px-5">
+      <div className="flex h-[80vh] w-full flex-col items-start justify-center gap-2 px-5">
         <Message type={"receive"} tail={true}>
           <a href="/write">Γράψε το Ανομολογητό σου</a>
         </Message>

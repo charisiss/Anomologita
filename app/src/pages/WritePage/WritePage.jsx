@@ -8,15 +8,15 @@ export default function AddNew() {
   const [formData, setFormData] = useState({
     field1: "",
     field2: "",
-    likes: 0, // Initialize 'likes' with default value 0
+    likes: 0,
   });
-  const [ticketNumber, setTicketNumber] = useState(1); // Initialize ticket number
+  const [ticketNumber, setTicketNumber] = useState(1);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
-    // Fetch the number of documents to determine the next ticket number
     const fetchTicketCount = async () => {
       const querySnapshot = await getDocs(collection(db, "anomologita"));
-      setTicketNumber(querySnapshot.docs.length + 1); // Next ticket number
+      setTicketNumber(querySnapshot.docs.length + 1);
     };
 
     fetchTicketCount();
@@ -32,22 +32,25 @@ export default function AddNew() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const dataToSubmit = {
-      ...formData,
-      ticket: ticketNumber, // Use the state ticket number
-      completed: false, // Add a boolean field set to false
-      likes: 0, // Initialize 'likes' with default value 0
-    };
 
-    try {
-      await addDoc(collection(db, "anomologita"), dataToSubmit);
-      console.log("Document written with ticket number: ", ticketNumber);
-      // Increment ticket number for the next submission
-      setTicketNumber((prevNumber) => prevNumber + 1);
-      // Reset the form fields after successful submission
-      setFormData({ field1: "", field2: "", likes: 0 });
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    // Check if field1 is not empty before submitting
+    if (formData.field1.trim() !== "") {
+      const dataToSubmit = {
+        ...formData,
+        ticket: ticketNumber,
+        completed: false,
+        likes: 0,
+      };
+
+      try {
+        await addDoc(collection(db, "anomologita"), dataToSubmit);
+        console.log("Document written with ticket number: ", ticketNumber);
+        setTicketNumber((prevNumber) => prevNumber + 1);
+        setFormData({ field1: "", field2: "", likes: 0 });
+        setIsFormSubmitted(true);
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
     }
   };
 
@@ -70,24 +73,28 @@ export default function AddNew() {
             maxLength="60"
             placeholder="Γράψε κάτι..."
           />
-          {/* <input
-            name="field2"
-            value={formData.field2}
-            onChange={handleChange}
-            className="bg-[#d1d5db] rounded-md w-4/5 h-12 text-center mb-5 text-black mx-auto"
-            placeholder="#Ο Αριθμός Σου"
-          /> */}
+
           <button
             type="submit"
-            className="mb-0 w-full rounded-b-xl rounded-t-none bg-[#1a1a1a] px-3 py-2 text-white ring-0 hover:border-[#1a1a1a] hover:ring-0"
+            className="mb-0 w-full rounded-b-xl rounded-t-none bg-[#1a1a1a] px-3 py-2 text-white ring-0 hover:border-[#1a1a1a] hover:ring-0 focus:border-none focus:outline-none focus:ring-0"
+            disabled={formData.field1.trim() === ""}
           >
             ΑΠΟΣΤΟΛΗ
           </button>
+
           <img
             src="/kiss.png"
             className="absolute bottom-[-10px] right-[-10px] h-12"
           />
         </form>
+
+        {isFormSubmitted && (
+          <div className="width-full border-white">
+            <p className="text-center text-white">
+              Το ανομολογητό σου στάλθηκε!
+            </p>
+          </div>
+        )}
       </div>
     </Wrapper>
   );

@@ -49,7 +49,7 @@ export default function ReadPage() {
       <div className="flex w-full flex-col items-start justify-center gap-5 px-5">
         {data.map((item) => (
           <MessageComponent
-            key={item.docId}
+            key={`${item.docId}-${item.likes}`}
             title={item.field1}
             likeCount={item.likes}
             onLike={() => handleLike(item.docId)}
