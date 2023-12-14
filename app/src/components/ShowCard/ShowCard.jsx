@@ -70,7 +70,7 @@ const ShowCard = ({
     <div
       className={`bg-${color ? color : "white"} ${
         likes == undefined ? "w-1/2" : "w-full"
-      }  flex h-auto w-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] p-5 lg:w-auto ${customClass}`}
+      }  flex h-auto h-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] p-5 lg:w-auto ${customClass}`}
     >
       <div className="flex items-end justify-between">
         <div className="flex items-end gap-4">

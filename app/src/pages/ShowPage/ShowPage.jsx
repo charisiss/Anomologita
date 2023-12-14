@@ -78,7 +78,7 @@ export default function ShowPage() {
             {completedItems.slice(-9).map((item) => (
               <div className="col-span-3" key={item.id}>
                 <ShowCard
-                  key={item.id}
+                  key={`${item.id}-${item.likes}`} // Change the key when likes change
                   message={item.field1}
                   likeCount={item.likes}
                   onLike={() => handleLike(item.id)}
@@ -89,7 +89,7 @@ export default function ShowPage() {
           </div>
           <div className="order-3 col-span-2 row-span-3 flex justify-center">
             <div className="">
-              <p className="mb-1 text-center text-4xl font-bold">
+              <p className="mb-1 text-center text-4xl font-bold text-white">
                 SCAN TO WRITE
               </p>
 

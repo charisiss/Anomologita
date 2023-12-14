@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  doc,
+  updateDoc,
+  increment,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js";
 import Wrapper from "@components/Layout/Wrapper.jsx";
 import MessageComponent from "@components/MessageComponent.jsx";
@@ -27,14 +35,24 @@ export default function ReadPage() {
     fetchData();
   }, []);
 
+  const handleLike = (docId) => {
+    const docRef = doc(db, "anomologita", docId);
+    updateDoc(docRef, {
+      likes: increment(1),
+    }).catch((error) => {
+      console.error("Error updating likes: ", error);
+    });
+  };
+
   return (
     <Wrapper>
-      <div className="flex h-[87vh] w-full flex-col items-start justify-center gap-5 px-5">
+      <div className="grid h-[87vh] w-full flex-col items-start justify-center gap-5 px-5">
         {data.map((item) => (
           <MessageComponent
             key={item.docId}
             title={item.field1}
             likeCount={item.likes}
+            onLike={() => handleLike(item.docId)}
           />
         ))}
       </div>
