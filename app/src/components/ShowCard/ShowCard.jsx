@@ -8,6 +8,7 @@ const ShowCard = ({
   stroke,
   onLike,
   customClass,
+  messageId,
 }) => {
   const [likes, setLikes] = useState(likeCount);
   const [filled, setFilled] = useState(false);
@@ -34,61 +35,73 @@ const ShowCard = ({
       }
     };
   }, []);
+  let user = 1;
+  let icon = 1;
+  if (messageId != undefined) user = messageId % 10;
 
-  const user = Math.floor(Math.random() * 4) + 1;
-  let username = "Anonymus "
+  let username = "Anonymus ";
+
   switch (user) {
+    case 0:
     case 1:
+    case 5:
+    case 6:
       username += "Santa";
+      icon = "1";
       break;
     case 2:
+    case 7:
       username += "Reindeer";
+      icon = "2";
       break;
     case 3:
+    case 8:
       username += "Elf";
+      icon = "3";
       break;
     case 4:
+    case 9:
       username += "Sock";
+      icon = "4";
       break;
-    }
+  }
 
   return (
     <div
       className={`bg-${color ? color : "white"} ${
         likes == undefined ? "w-1/2" : "w-full"
-      }  bg-[#f0f0f0] rounded-xl rounded-b-2xl w-full lg:w-auto h-auto flex flex-col justify-around p-5 ${customClass}`}
+      }  flex h-auto w-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] p-5 lg:w-auto ${customClass}`}
     >
       <div className="flex items-end justify-between">
         <div className="flex items-end gap-4">
-          <img className="w-16" src={`/user-${user}.png`} />
+          <img className="w-16" src={`/user-${icon}.png`} />
 
           <div className="flex flex-col gap-0">
-            <h2 className="text-black font-extrabold">{username}</h2>
-            <h2 className="text-black leading-3 mb-2">redxmas.gr</h2>
+            <h2 className="font-extrabold text-black">{username}</h2>
+            <h2 className="mb-2 leading-3 text-black">redxmas.gr</h2>
           </div>
         </div>
         {likes != undefined ? (
-        <div className="flex flex-col justify-center">
-          <HeartIcon
-            filled={filled}
-            onClick={handleHeartClick}
-            stroke={stroke}
-          />
-          <p className={`text-${color ? "white" : "red"} text-center`}>
-            {likes}
-          </p>
-        </div>
-      ) : null}
+          <div className="flex flex-col justify-center">
+            <HeartIcon
+              filled={filled}
+              onClick={handleHeartClick}
+              stroke={stroke}
+            />
+            <p className={`text-${color ? "white" : "red"} text-center`}>
+              {likes}
+            </p>
+          </div>
+        ) : null}
       </div>
 
       <h2
-        className={`text-lg font-extrabold text-black uppercase my-5 text-center text-${
+        className={`my-5 text-center text-lg font-extrabold uppercase text-black text-${
           color ? "white" : "black"
         } uppercase`}
       >
-        {message} 
+        {message}
       </h2>
-      
     </div>
   );
 };

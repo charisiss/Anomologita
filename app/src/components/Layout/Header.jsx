@@ -2,34 +2,9 @@ import { NavLink } from "react-router-dom";
 import { classNames } from "../common/HelperFunctions";
 import { REDXMAS_NAVIGATION } from "../../routers/router";
 
-const Header = ({ hideHeaderMenu }) => {
-  const navigateHandler = (page) => {
-    // console.log(page);
-  };
+const Header = () => {
   return (
-    // <div className="sticky top-0 h-16 bg-white">
-    //   <div
-    //     className={`${
-    //       hideHeaderMenu == "true" ? "h-full" : "h-3/5"
-    //     } flex justify-center`}
-    //   >
-    //     <img className="h-auto w-auto" src="redxmaslogo.png"></img>
-    //     <img className="h-auto w-auto" src="Infititis-Logo.png"></img>
-    //   </div>
-    //   <div
-    //     className={`flex justify-center border border-t-[#1a1a1a] ${
-    //       hideHeaderMenu == "true" ? "hidden" : "block h-2/5"
-    //     }`}
-    //   >
-    //     <h2 className="w-1/2 border border-r-[#1a1a1a] px-3 text-base font-bold leading-7 text-[#1a1a1a]">
-    //       ΓΡΑΨΕ
-    //     </h2>
-    //     <h2 className="w-1/2 border px-3 text-base font-bold leading-7 text-[#1a1a1a] ">
-    //       ΔΙΑΒΑΣΕ
-    //     </h2>
-    //   </div>
-    // </div>
-    <div className="bg-white">
+    <div className="left-0 top-0 z-20 block w-full bg-white">
       <div className="mx-auto h-16 max-w-7xl px-2">
         <div className={`flex h-full w-full justify-between`}>
           <div className="flex gap-2">
@@ -40,9 +15,6 @@ const Header = ({ hideHeaderMenu }) => {
                 alt="redxmaslogo"
               />
             </NavLink>
-            {/* <div className="flex flex-shrink-0 items-center">
-              <img className="block h-10" src="Infititis-Logo.png" alt="InfititisLogo"/>
-            </div> */}
           </div>
           <div className={`flex h-full justify-end`}>
             <div className="flex gap-2 p-2">
@@ -50,7 +22,6 @@ const Header = ({ hideHeaderMenu }) => {
                 <NavLink
                   key={item.name}
                   to={item.href}
-                  onClick={() => navigateHandler(item.name)}
                   className={({ isActive }) =>
                     classNames(
                       isActive
