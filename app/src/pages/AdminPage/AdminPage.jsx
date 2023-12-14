@@ -16,13 +16,13 @@ function AdminPage() {
   const [isLocked, setIsLocked] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false); // New state for update status
   const [password, setPassword] = useState("");
-  const correctPassword = "demo";
+  const correctPassword = "infadmin";
 
   useEffect(() => {
     if (!isLocked) {
       const q = query(
         collection(db, "anomologita"),
-        where("completed", "==", false) // Fetch items where completed is false
+        where("completed", "==", false), // Fetch items where completed is false
       );
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -66,9 +66,9 @@ function AdminPage() {
   return (
     <Wrapper>
       <div>
-        <h1 className="text-center">ADMIN</h1>
+        <h1 className="text-center text-white">ADMIN</h1>
         {isLocked && !isUpdating ? (
-          <div className="w-full h-[50vh] flex flex-col gap-2 justify-center items-center">
+          <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-2">
             <label htmlFor="password" className="text-2xl">
               ΚΩΔΙΚΟΣ:
             </label>
@@ -81,7 +81,7 @@ function AdminPage() {
             />
             <button
               onClick={handlePasswordSubmit}
-              className="bg-white border-4 border-[#1a1a1a] hover:border-[#900009] text-[#1a1a1a]"
+              className="border-4 border-[#1a1a1a] bg-white text-[#1a1a1a] hover:border-[#900009]"
             >
               Συνδεση
             </button>
@@ -89,12 +89,12 @@ function AdminPage() {
         ) : (
           data.map((item) => (
             <div key={item.docId}>
-              <div className="flex flex-col justify-center items-center py-2">
+              <div className="flex flex-col items-center justify-center py-2">
                 <MessageComponent title={item.field1} likeCount={item.field3} />
               </div>
               <div className="flex justify-center">
                 <button
-                  className="bg-red text-white mr-5 hover:border-none"
+                  className="mr-5 bg-red text-white hover:border-none"
                   onClick={() => updateBooleanValue(item.docId, null)}
                 >
                   ΑΠΟΡΡΙΨΗ
