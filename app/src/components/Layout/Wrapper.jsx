@@ -10,17 +10,8 @@ export default function Wrapper({ fullWidth, fullHeight, children }) {
   const images = [snowflake1];
   return (
     <div className="bg-[url('/basic-bg.jpg')] bg-cover bg-center bg-no-repeat font-manrope">
-      <div
-        className="relative flex min-h-screen flex-col overflow-x-hidden bg-black/40 backdrop-blur-sm"
-        style={{
-          minHeight: `${
-            location.pathname === "/show"
-              ? "min-h-screen"
-              : "calc(100vh - 4rem)"
-          }`,
-        }}
-      >
-        <div className="absolute h-full w-screen bg-transparent">
+      <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-black/40 backdrop-blur-sm">
+        <div className="absolute left-0 top-0 h-full w-screen bg-transparent">
           <Snowfall
             color="white"
             style={{ background: "transparent" }}
