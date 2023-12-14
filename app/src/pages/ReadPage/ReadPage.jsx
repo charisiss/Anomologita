@@ -11,11 +11,11 @@ export default function ReadPage() {
     const fetchData = async () => {
       const q = query(
         collection(db, "anomologita"),
-        where("completed", "==", true)
+        where("completed", "==", true),
       );
       const querySnapshot = await getDocs(q);
       const dataList = querySnapshot.docs
-        .map(doc => ({
+        .map((doc) => ({
           ...doc.data(),
           docId: doc.id,
         }))
@@ -29,9 +29,13 @@ export default function ReadPage() {
 
   return (
     <Wrapper>
-      <div className="flex flex-col justify-center items-start w-full h-[87vh] px-5 gap-5">
+      <div className="flex h-[87vh] w-full flex-col items-start justify-center gap-5 px-5">
         {data.map((item) => (
-          <MessageComponent key={item.docId} title={item.field1} likeCount={item.likes} />
+          <MessageComponent
+            key={item.docId}
+            title={item.field1}
+            likeCount={item.likes}
+          />
         ))}
       </div>
     </Wrapper>

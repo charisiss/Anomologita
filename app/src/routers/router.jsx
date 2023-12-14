@@ -6,7 +6,7 @@ import ComingSoon from "../pages/ComingPage/ComingSoon";
 import HomePage from "../pages/HomePage/HomePage";
 import AddNew from "../pages/WritePage/WritePage";
 import ShowPage from "../pages/ShowPage/ShowPage";
-import DisplayPage from "../pages/ReadPage/ReadPage";
+import ReadPage from "../pages/ReadPage/ReadPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import App from "../App";
 
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/read",
-        element: <DisplayPage />,
+        element: <ReadPage />,
       },
       {
         path: "/admin",

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js"; // Import your Firebase config
 import Wrapper from "@components/Layout/Wrapper.jsx";
+import NewWrapper from "../../components/Layout/NewWrapper.jsx";
 
 export default function AddNew() {
   const [formData, setFormData] = useState({
@@ -52,12 +53,12 @@ export default function AddNew() {
 
   return (
     <Wrapper>
-      <div className="flex flex-col justify-center items-center w-full h-[85vh] px-5 gap-10">
+      <div className="flex h-[85vh] w-full flex-col items-center justify-center gap-10 px-5">
         <form
           onSubmit={handleSubmit}
-          className="relative bg-[#f0f0f0] rounded-xl rounded-b-2xl w-full lg:w-auto h-auto flex flex-col justify-around "
+          className="relative flex h-auto w-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] lg:w-auto "
         >
-          <h1 className="text-lg font-extrabold text-black uppercase my-5 px-5">
+          <h1 className="my-5 px-5 text-lg font-extrabold uppercase text-black">
             Γραψε το ανομολογητο σου
           </h1>
 
@@ -65,7 +66,7 @@ export default function AddNew() {
             name="field1"
             value={formData.field1}
             onChange={handleChange}
-            className="bg-[#d1d5db] rounded-md w-4/5 p-3 h-24 text-center mb-5 text-black mx-auto  focus:ring-0 focus:outline-none"
+            className="mx-auto mb-5 h-24 w-4/5 rounded-md bg-[#d1d5db] p-3 text-center text-black  focus:outline-none focus:ring-0"
             maxLength="60"
             placeholder="Γράψε κάτι..."
           />
@@ -78,14 +79,15 @@ export default function AddNew() {
           /> */}
           <button
             type="submit"
-            className="bg-[#1a1a1a] w-full rounded-t-none rounded-b-xl mb-0 px-3 py-2 text-white ring-0 hover:ring-0 hover:border-[#1a1a1a]"
+            className="mb-0 w-full rounded-b-xl rounded-t-none bg-[#1a1a1a] px-3 py-2 text-white ring-0 hover:border-[#1a1a1a] hover:ring-0"
           >
             ΑΠΟΣΤΟΛΗ
           </button>
-          <img src="/kiss.png" className="absolute bottom-[-10px] right-[-10px] h-12"/>
-
+          <img
+            src="/kiss.png"
+            className="absolute bottom-[-10px] right-[-10px] h-12"
+          />
         </form>
-
       </div>
     </Wrapper>
   );
