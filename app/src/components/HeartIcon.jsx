@@ -36,7 +36,7 @@ const HeartIcon = ({ filled, onClick, stroke }) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-8 w-8"
+        className="h-10 w-10"
       >
         <defs>
           <clipPath id="a">

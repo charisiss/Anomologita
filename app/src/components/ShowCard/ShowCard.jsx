@@ -74,11 +74,11 @@ const ShowCard = ({
     >
       <div className="flex items-end justify-between">
         <div className="flex items-end gap-4">
-          <img className="w-16" src={`/user-${icon}.png`} />
+          <img className="w-20" src={`/user-${icon}.png`} />
 
           <div className="flex flex-col gap-0">
-            <h2 className="font-extrabold text-black">{username}</h2>
-            <h2 className="mb-2 leading-3 text-black">redxmas.gr</h2>
+            <h2 className="text-3xl font-extrabold text-black">{username}</h2>
+            <h2 className="mb-2 text-3xl leading-3 text-black">redxmas.gr</h2>
           </div>
         </div>
         {likes != undefined ? (
@@ -91,7 +91,7 @@ const ShowCard = ({
             <p
               className={`text-${
                 color ? "white" : "red"
-              } select-none text-center`}
+              } select-none text-center text-3xl`}
             >
               {likes}
             </p>
@@ -100,7 +100,7 @@ const ShowCard = ({
       </div>
 
       <h2
-        className={`my-5 text-center text-lg font-extrabold uppercase text-black text-${
+        className={`my-5 text-center text-4xl font-extrabold uppercase text-black text-${
           color ? "white" : "black"
         } uppercase`}
       >

@@ -30,7 +30,7 @@ export default function ShowPage() {
         }))
         .sort((a, b) => b.ticket - a.ticket);
 
-      setCompletedItems(items.slice(0, 9));
+      setCompletedItems(items.slice(0, 6));
       const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
       setTopThreeLiked(sortedByLikes.slice(0, 3));
     });
@@ -59,7 +59,7 @@ export default function ShowPage() {
           <h2 className="py-5 text-center text-5xl font-bold text-white ">
             TOP 3
           </h2>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-3 gap-5 px-16">
             {topThreeLiked.map((item) => (
               <ShowCard
                 key={`${item.id}-${item.likes}`} // Change the key when likes change
@@ -79,7 +79,7 @@ export default function ShowPage() {
             <img className="w-50 rounded-xl" src="/redxmaslogo.png"></img>
           </div>
 
-          <div className="col-span-8 grid grid-cols-9 gap-3">
+          <div className="col-span-8 grid grid-cols-6 gap-5">
             {completedItems.slice(-9).map((item) => (
               <div className="col-span-3" key={item.id}>
                 <ShowCard
