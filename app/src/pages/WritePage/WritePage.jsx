@@ -31,6 +31,7 @@ export default function AddNew() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    return;
 
     // Check if field1 is not empty before submitting
     if (formData.field1.trim() !== "") {

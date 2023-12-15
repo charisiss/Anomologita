@@ -40,11 +40,22 @@ export default function ShowPage() {
 
   const handleLike = (docId) => {
     const docRef = doc(db, "anomologita", docId);
-    updateDoc(docRef, {
-      likes: increment(1),
-    }).catch((error) => {
-      console.error("Error updating likes: ", error);
-    });
+
+    // Add a timeout of 1 second (adjust the duration as needed)
+    const timeoutDuration = 30000;
+
+    // Wrap the updateDoc function in a setTimeout
+    setTimeout(() => {
+      updateDoc(docRef, {
+        likes: increment(1),
+      })
+        .then(() => {
+          console.log("Likes updated successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating likes: ", error);
+        });
+    }, timeoutDuration);
   };
 
   return (
