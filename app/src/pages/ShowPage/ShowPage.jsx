@@ -30,7 +30,7 @@ export default function ShowPage() {
         }))
         .sort((a, b) => b.ticket - a.ticket);
 
-      setCompletedItems(items.slice(0, 6));
+      setCompletedItems(items.slice(0, 8));
       const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
       setTopThreeLiked(sortedByLikes.slice(0, 3));
     });
@@ -67,7 +67,7 @@ export default function ShowPage() {
               REDXMAS.GR
             </h2>
           </div>
-          <h2 className="py-5 text-center text-5xl font-bold text-white ">
+          {/* <h2 className="py-5 text-center text-5xl font-bold text-white ">
             TOP 3
           </h2>
           <div className="grid grid-cols-3 gap-5 px-16">
@@ -79,7 +79,7 @@ export default function ShowPage() {
                 onLike={() => handleLike(item.id)}
               />
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="col-span-12 grid grid-cols-12 grid-rows-1 gap-5 pt-16">
@@ -91,7 +91,7 @@ export default function ShowPage() {
           </div>
 
           <div className="col-span-8 grid grid-cols-6 gap-5">
-            {completedItems.slice(-9).map((item) => (
+            {completedItems.slice(-8).map((item) => (
               <div className="col-span-3" key={item.id}>
                 <ShowCard
                   key={`${item.id}-${item.likes}`} // Change the key when likes change
@@ -103,7 +103,7 @@ export default function ShowPage() {
               </div>
             ))}
           </div>
-          <div className="order-3 col-span-2 row-span-3 flex justify-center">
+          <div className="order-3 col-span-2 row-span-4 flex justify-center">
             <div className="flex flex-col">
               <div className="flex justify-center">
                 <h2 className="w-full rounded-t-xl bg-[#430002] p-5 text-center text-4xl font-bold text-white">
