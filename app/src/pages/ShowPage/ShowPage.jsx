@@ -51,6 +51,11 @@ export default function ShowPage() {
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
       <div className="gap-15 relative flex w-full flex-col items-center">
         <div className="w-full">
+          <div className="flex justify-center">
+            <h2 className="w-auto rounded-xl bg-[#430002] p-10 text-center text-7xl font-bold text-white underline">
+              REDXMAS.GR
+            </h2>
+          </div>
           <h2 className="py-5 text-center text-5xl font-bold text-white ">
             TOP 3
           </h2>
