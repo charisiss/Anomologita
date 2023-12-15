@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
       /* Unguarded Routes */
       {
         path: "/",
-        element: <ComingSoon />,
+        element: <HomePage />,
       },
       {
         path: "/error",

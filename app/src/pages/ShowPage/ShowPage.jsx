@@ -51,7 +51,7 @@ export default function ShowPage() {
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
       <div className="gap-15 relative flex w-full flex-col items-center">
         <div className="w-full">
-          <h2 className="pb-3 text-center text-5xl font-bold text-white ">
+          <h2 className="py-5 text-center text-5xl font-bold text-white ">
             TOP 3
           </h2>
           <div className="grid grid-cols-3 gap-5">
@@ -68,8 +68,8 @@ export default function ShowPage() {
 
         <div className="col-span-12 grid grid-cols-12 grid-rows-1 gap-5 pt-16">
           <div className="col-span-2 row-span-3 flex flex-col items-center">
-            <img className="w-full" src="/Infititis-Logo.png"></img>
-            <img className="w-64" src="/infinityGreeceLogo.png"></img>
+            <img className="w-56" src="/Infititis-Logo.png"></img>
+            <img className="w-56" src="/infinityGreeceLogo.png"></img>
             <img className="w-32" src="xoxo.png" alt="xoxo" />
             <img className="w-50 rounded-xl" src="/redxmaslogo.png"></img>
           </div>
@@ -88,12 +88,17 @@ export default function ShowPage() {
             ))}
           </div>
           <div className="order-3 col-span-2 row-span-3 flex justify-center">
-            <div className="">
-              <p className="mb-1 text-center text-4xl font-bold text-white">
+            <div className="flex flex-col">
+              <div className="flex justify-center">
+                <h2 className="w-full rounded-t-xl bg-[#430002] p-5 text-center text-4xl font-bold text-white">
+                  REDXMAS.GR
+                </h2>
+              </div>
+
+              <img className="w-50 rounded-b-xl" src="/qr-red.png"></img>
+              <p className="mt-2 text-center text-4xl font-bold text-white">
                 SCAN TO WRITE
               </p>
-
-              <img className="w-50 rounded-xl" src="/qr-red.png"></img>
             </div>
           </div>
         </div>

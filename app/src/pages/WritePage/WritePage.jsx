@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js"; // Import your Firebase config
 import Wrapper from "@components/Layout/Wrapper.jsx";
-import NewWrapper from "../../components/Layout/NewWrapper.jsx";
 
 export default function AddNew() {
   const [formData, setFormData] = useState({
@@ -61,7 +60,7 @@ export default function AddNew() {
           onSubmit={handleSubmit}
           className="relative flex h-auto w-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] lg:w-auto "
         >
-          <h1 className="my-5 px-5 text-lg font-extrabold uppercase text-black">
+          <h1 className="my-5 px-5 text-center text-lg font-extrabold uppercase text-black">
             Γραψε το ανομολογητο σου
           </h1>
 

@@ -39,17 +39,17 @@ const ShowCard = ({
   let icon = 1;
   if (messageId != undefined) user = messageId % 10;
 
-  let username = "Anonymus ";
+  let username = "Anonymous ";
 
   switch (user) {
     case 0:
     case 1:
     case 5:
-    case 6:
       username += "Santa";
       icon = "1";
       break;
     case 2:
+    case 6:
     case 7:
       username += "Reindeer";
       icon = "2";
@@ -70,7 +70,7 @@ const ShowCard = ({
     <div
       className={`bg-${color ? color : "white"} ${
         likes == undefined ? "w-1/2" : "w-full"
-      }  flex h-auto h-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] p-5 lg:w-auto ${customClass}`}
+      }  flex h-full flex-col justify-around rounded-xl rounded-b-2xl bg-[#f0f0f0] p-5 lg:w-auto ${customClass}`}
     >
       <div className="flex items-end justify-between">
         <div className="flex items-end gap-4">
@@ -88,7 +88,11 @@ const ShowCard = ({
               onClick={handleHeartClick}
               stroke={stroke}
             />
-            <p className={`text-${color ? "white" : "red"} text-center`}>
+            <p
+              className={`text-${
+                color ? "white" : "red"
+              } select-none text-center`}
+            >
               {likes}
             </p>
           </div>

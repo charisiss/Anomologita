@@ -69,21 +69,21 @@ function AdminPage() {
         <h1 className="text-center text-white">ADMIN</h1>
         {isLocked && !isUpdating ? (
           <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-2">
-            <label htmlFor="password" className="text-2xl">
+            <label htmlFor="password" className="text-3xl font-bold">
               ΚΩΔΙΚΟΣ:
             </label>
             <input
               type="password"
               id="password"
-              className="bg-white text-red"
+              className="bg-white text-xl text-red"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
               onClick={handlePasswordSubmit}
-              className="border-4 border-[#1a1a1a] bg-white text-[#1a1a1a] hover:border-[#900009]"
+              className="border-none bg-white text-xl font-bold text-red outline-none hover:border-none hover:outline-none hover:ring-0 focus:outline-none focus:ring-0"
             >
-              Συνδεση
+              ΣΥΝΔΕΣΗ
             </button>
           </div>
         ) : (

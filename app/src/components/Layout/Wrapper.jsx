@@ -1,4 +1,3 @@
-import React from "react";
 import Snowfall from "react-snowfall";
 
 export default function Wrapper({ fullWidth, fullHeight, children }) {
@@ -20,9 +19,9 @@ export default function Wrapper({ fullWidth, fullHeight, children }) {
               left: 0,
               zIndex: 10,
             }}
-            snowflakeCount={150}
+            snowflakeCount={80}
             images={images}
-            radius={[5, 15]}
+            radius={[15, 25]}
           />
         </div>
         <div className="absolute z-20 h-full w-full overflow-y-auto">

@@ -6,12 +6,16 @@ export default function HomePage() {
     <Wrapper>
       {/* <div className="flex flex-col justify-center items-start w-full h-[87vh] px-5 gap-10"> */}
       <div className="flex h-[80vh] w-full flex-col items-start justify-center gap-2 px-5">
-        <Message type={"receive"} tail={true}>
-          <a href="/write">Γράψε το Ανομολογητό σου</a>
-        </Message>
-        <Message type={"send"} tail={true}>
-          <a href="/read">Διάβασε τα Ανομολόγητα</a>
-        </Message>
+        <a href="/write" className="flex w-full">
+          <Message type={"receive"} tail={true}>
+            Γράψε το Ανομολογητό σου
+          </Message>
+        </a>
+        <a href="/read" className="flex w-full justify-end">
+          <Message type={"send"} tail={true}>
+            Διάβασε τα Ανομολόγητα
+          </Message>
+        </a>
         <Message type={"receive"} isItLoading={true} tail={true}></Message>
       </div>
     </Wrapper>
