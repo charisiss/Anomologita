@@ -53,7 +53,7 @@ const MessageComponent = ({
       >
         {title}
       </h2>
-      {likes != undefined ? (
+      {/* {likes != undefined ? (
         <div className="mb-[-18px] flex flex-col justify-center pr-5">
           <HeartIcon
             filled={filled}
@@ -64,7 +64,7 @@ const MessageComponent = ({
             {likes}
           </p>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

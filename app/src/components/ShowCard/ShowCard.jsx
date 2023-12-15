@@ -81,7 +81,7 @@ const ShowCard = ({
             <h2 className="mb-2 text-3xl leading-3 text-black">redxmas.gr</h2>
           </div>
         </div>
-        {likes != undefined ? (
+        {/* {likes != undefined ? (
           <div className="flex flex-col justify-center">
             <HeartIcon
               filled={filled}
@@ -96,7 +96,7 @@ const ShowCard = ({
               {likes}
             </p>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
 
       <h2
