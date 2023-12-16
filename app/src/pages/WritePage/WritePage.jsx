@@ -31,6 +31,8 @@ export default function AddNew() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsFormSubmitted(true);
+    return;
 
     // Check if field1 is not empty before submitting
     if (formData.field1.trim() !== "") {
@@ -90,7 +92,8 @@ export default function AddNew() {
         {isFormSubmitted && (
           <div className="width-full border-white">
             <p className="text-center text-white">
-              Το ανομολογητό σου στάλθηκε!
+              Τα ανομολόγητα τελείωσαν, του χρόνου όμως θα επιστρέψουν ακόμα
+              καλύτερα!
             </p>
           </div>
         )}
