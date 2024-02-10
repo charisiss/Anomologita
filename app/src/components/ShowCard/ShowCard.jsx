@@ -44,24 +44,27 @@ const ShowCard = ({
   switch (user) {
     case 0:
     case 1:
+      username += "Carnibal";
+      icon = "1";
+      break;
     case 5:
-      username += "Santa";
+      username += "Tv";
       icon = "1";
       break;
     case 2:
     case 6:
     case 7:
-      username += "Reindeer";
+      username += "Cassette";
       icon = "2";
       break;
     case 3:
     case 8:
-      username += "Elf";
+      username += "Clown";
       icon = "3";
       break;
     case 4:
     case 9:
-      username += "Sock";
+      username += "Disco";
       icon = "4";
       break;
   }
@@ -78,7 +81,7 @@ const ShowCard = ({
 
           <div className="flex flex-col gap-0">
             <h2 className="text-3xl font-extrabold text-black">{username}</h2>
-            <h2 className="mb-2 text-3xl leading-3 text-black">redxmas.gr</h2>
+            <h2 className="my-2 text-3xl leading-3 text-black">bit.ly/ftf</h2>
           </div>
         </div>
         {/* {likes != undefined ? (

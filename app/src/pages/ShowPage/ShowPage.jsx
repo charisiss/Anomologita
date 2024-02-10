@@ -30,7 +30,7 @@ export default function ShowPage() {
         }))
         .sort((a, b) => b.ticket - a.ticket);
 
-      setCompletedItems(items.slice(0, 8));
+      setCompletedItems(items.slice(0, 9));
       const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
       setTopThreeLiked(sortedByLikes.slice(0, 3));
     });
@@ -64,7 +64,7 @@ export default function ShowPage() {
         <div className="w-full">
           <div className="flex justify-center">
             <h2 className="w-auto rounded-xl bg-[#430002] p-10 text-center text-7xl font-bold text-white underline">
-              REDXMAS.GR
+              BIT.LY/FTF
             </h2>
           </div>
           {/* <h2 className="py-5 text-center text-5xl font-bold text-white ">
@@ -84,14 +84,24 @@ export default function ShowPage() {
 
         <div className="col-span-12 grid grid-cols-12 grid-rows-1 gap-5 pt-16">
           <div className="col-span-2 row-span-3 flex flex-col items-center">
+            <div className="flex flex-col pb-4">
+              <div className="flex justify-center">
+                <h2 className="w-full rounded-t-xl bg-[#430002] p-5 text-center text-4xl font-bold text-white">
+                  BIT.LY/FTF
+                </h2>
+              </div>
+
+              <img className="w-50 rounded-b-xl" src="/qr-red.png"></img>
+              <p className="mt-2 text-center text-4xl font-bold text-white">
+                SCAN TO WRITE
+              </p>
+            </div>
             <img className="w-56" src="/Infititis-Logo.png"></img>
             <img className="w-56" src="/infinityGreeceLogo.png"></img>
-            <img className="w-32" src="xoxo.png" alt="xoxo" />
-            <img className="w-50 rounded-xl" src="/redxmaslogo.png"></img>
           </div>
 
-          <div className="col-span-8 grid grid-cols-6 gap-5">
-            {completedItems.slice(-8).map((item) => (
+          <div className="col-span-10 grid grid-cols-9 gap-5">
+            {completedItems.slice(-9).map((item) => (
               <div className="col-span-3" key={item.id}>
                 <ShowCard
                   key={`${item.id}-${item.likes}`} // Change the key when likes change
@@ -102,20 +112,6 @@ export default function ShowPage() {
                 />
               </div>
             ))}
-          </div>
-          <div className="order-3 col-span-2 row-span-4 flex justify-center">
-            <div className="flex flex-col">
-              <div className="flex justify-center">
-                <h2 className="w-full rounded-t-xl bg-[#430002] p-5 text-center text-4xl font-bold text-white">
-                  REDXMAS.GR
-                </h2>
-              </div>
-
-              <img className="w-50 rounded-b-xl" src="/qr-red.png"></img>
-              <p className="mt-2 text-center text-4xl font-bold text-white">
-                SCAN TO WRITE
-              </p>
-            </div>
           </div>
         </div>
       </div>

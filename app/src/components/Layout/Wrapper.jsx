@@ -1,28 +1,17 @@
-import Snowfall from "react-snowfall";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 export default function Wrapper({ fullWidth, fullHeight, children }) {
   const snowflake1 = document.createElement("img");
-  snowflake1.src = "snowflake.png";
+  snowflake1.src = "paper-bin.png";
 
-  const images = [snowflake1];
+  const { width, height } = useWindowSize();
 
   return (
     <div className="relative h-full">
       <div className="h-full bg-[url('/basic-bg.jpg')] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 h-full bg-black/40 backdrop-blur-sm">
-          <Snowfall
-            color="white"
-            style={{
-              background: "transparent",
-              position: "fixed",
-              top: 0,
-              left: 0,
-              zIndex: 10,
-            }}
-            snowflakeCount={80}
-            images={images}
-            radius={[15, 25]}
-          />
+        <div className="backdrop-blur-xs absolute inset-0 h-full bg-black/40">
+          <Confetti width={width - 20} height={height - 80} />
         </div>
         <div className="absolute z-20 h-full w-full overflow-y-auto">
           <div

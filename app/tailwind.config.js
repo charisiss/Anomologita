@@ -4,11 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        red: "#900009",
-        redHover: "#750008",
+        red: "#BD1B1B",
+        redHover: "#8a1313",
       },
       fontFamily: {
         manrope: "Manrope",
+      },
+      blur: {
+        xs: "1px",
       },
     },
   },

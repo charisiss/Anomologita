@@ -3,7 +3,7 @@ export default function Footer() {
     <div className="w-full bg-[#430004]">
       <div className="flex items-center justify-center">
         <p className="mx-4 hidden text-sm text-white xl:block">
-          Created by InfinityGreece Web Team &#169; 2023
+          Created by InfinityGreece Web Team &#169; 2024
         </p>
       </div>
       <div className="text-center sm:text-left xl:hidden">
