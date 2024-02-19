@@ -27,7 +27,7 @@ export default function ReadPage() {
           ...doc.data(),
           docId: doc.id,
         }))
-        .sort((a, b) => b.ticket - a.ticket); // Sort by ticket number in descending order
+        .sort((a, b) => new Date(b.time) - new Date(a.time)); // Sort by time in descending order
 
       setData(dataList);
     });

@@ -6,16 +6,14 @@ import Wrapper from "@components/Layout/Wrapper.jsx";
 export default function AddNew() {
   const [formData, setFormData] = useState({
     field1: "",
-    field2: "",
     likes: 0,
   });
-  const [ticketNumber, setTicketNumber] = useState(1);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     const fetchTicketCount = async () => {
       const querySnapshot = await getDocs(collection(db, "anomologita"));
-      setTicketNumber(querySnapshot.docs.length + 1);
+      console.log("Fetched ticket count: ", querySnapshot.docs.length); // Just to verify the ticket count fetching
     };
 
     fetchTicketCount();
@@ -35,18 +33,18 @@ export default function AddNew() {
 
     // Check if field1 is not empty before submitting
     if (formData.field1.trim() !== "") {
+      const currentTime = new Date().toLocaleString(); // Get current time as a string
       const dataToSubmit = {
         ...formData,
-        ticket: ticketNumber,
+        time: currentTime, // Use the current time instead of ticket number
         completed: false,
         likes: 0,
       };
 
       try {
         await addDoc(collection(db, "anomologita"), dataToSubmit);
-        console.log("Document written with ticket number: ", ticketNumber);
-        setTicketNumber((prevNumber) => prevNumber + 1);
-        setFormData({ field1: "", field2: "", likes: 0 });
+        console.log("Document written with time: ", currentTime);
+        setFormData({ field1: "", likes: 0 }); // Reset formData without field2
         setIsFormSubmitted(true);
       } catch (error) {
         console.error("Error adding document: ", error);

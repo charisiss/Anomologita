@@ -28,7 +28,7 @@ export default function ShowPage() {
           id: doc.id,
           ...doc.data(),
         }))
-        .sort((a, b) => b.ticket - a.ticket);
+        .sort((a, b) => new Date(b.time) - new Date(a.time)); // Sort by most recent based on `time`
 
       setCompletedItems(items.slice(0, 9));
       const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
@@ -108,7 +108,7 @@ export default function ShowPage() {
                   message={item.field1}
                   likeCount={item.likes}
                   onLike={() => handleLike(item.id)}
-                  messageId={item.ticket}
+                  messageId={item.id} // Changed to use `id` as `ticket` is no longer used
                 />
               </div>
             ))}
