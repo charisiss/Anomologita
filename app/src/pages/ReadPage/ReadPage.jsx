@@ -27,13 +27,26 @@ export default function ReadPage() {
           ...doc.data(),
           docId: doc.id,
         }))
-        .sort((a, b) => new Date(b.time) - new Date(a.time)); // Sort by time in descending order
+        .sort((a, b) => {
+          // Parse the custom date format "dd/mm/yyyy, hh:mm:ss" to a Date object
+          const dateA = parseDateString(a.time);
+          const dateB = parseDateString(b.time);
+          return dateB - dateA; // Sort by time in descending order
+        });
 
       setData(dataList);
     });
 
     return () => unsubscribe(); // Detach the listener when the component unmounts
   }, []);
+
+  // Helper function to parse the custom date format
+  function parseDateString(dateString) {
+    const [date, time] = dateString.split(', ');
+    const [day, month, year] = date.split('/');
+    const [hours, minutes, seconds] = time.split(':');
+    return new Date(`${month}/${day}/${year} ${time}`);
+  }
 
   const handleLike = (docId) => {
     const docRef = doc(db, "anomologita", docId);

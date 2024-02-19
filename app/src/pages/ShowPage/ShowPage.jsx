@@ -28,7 +28,11 @@ export default function ShowPage() {
           id: doc.id,
           ...doc.data(),
         }))
-        .sort((a, b) => new Date(b.time) - new Date(a.time)); // Sort by most recent based on `time`
+        .sort((a, b) => {
+          const dateA = parseDateString(a.time);
+          const dateB = parseDateString(b.time);
+          return dateB - dateA; // Sort by time in descending order
+        });
 
       setCompletedItems(items.slice(0, 9));
       const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
@@ -40,11 +44,8 @@ export default function ShowPage() {
 
   const handleLike = (docId) => {
     const docRef = doc(db, "anomologita", docId);
+    const timeoutDuration = 30000; // Set your desired timeout duration
 
-    // Add a timeout of 1 second (adjust the duration as needed)
-    const timeoutDuration = 30000;
-
-    // Wrap the updateDoc function in a setTimeout
     setTimeout(() => {
       updateDoc(docRef, {
         likes: increment(1),
@@ -56,6 +57,13 @@ export default function ShowPage() {
           console.error("Error updating likes: ", error);
         });
     }, timeoutDuration);
+  };
+
+  // Helper function to parse the custom date format "dd/mm/yyyy, hh:mm:ss"
+  function parseDateString(dateString) {
+    const [date, time] = dateString.split(', ');
+    const [day, month, year] = date.split('/');
+    return new Date(`${month}/${day}/${year} ${time}`);
   };
 
   return (
