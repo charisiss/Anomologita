@@ -33,7 +33,7 @@ export const REDXMAS_NAVIGATION = () => {
     // ...(isAuthenticated
     //   ? [
     { name: "ΓΡΑΨΕ", href: "/write" },
-    { name: "ΔΙΑΒΑΣΕ", href: "/read" },
+    // { name: "ΔΙΑΒΑΣΕ", href: "/read" },
     // { name: "Show", href: "/show" },
     // { name: "Display", href: "/display" },
     // { name: "Admin", href: "/admin" },
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
     children: [
       /* Unguarded Routes */
       {
-        path: "/",
+        path: "/coming",
         element: <ComingSoon />,
       },
       {
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <HomePage />,
+        element: <AddNew />,
       },
       {
         path: "/write",

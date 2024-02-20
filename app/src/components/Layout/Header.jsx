@@ -7,18 +7,24 @@ const Header = () => {
     <div className="z-20 w-full bg-white">
       <div className="mx-auto h-16 max-w-7xl px-2">
         <div className={`flex h-full w-full justify-between`}>
-          <div className="flex gap-2">
-            <NavLink className="flex flex-shrink-0 items-center" to={"/home"}>
-              <img
+          <div className="flex gap-2 max-lg:w-full max-lg:justify-center">
+            <NavLink
+              className="flex flex-shrink-0 items-center text-2xl font-bold text-red  max-lg:text-center"
+              to={"/home"}
+            >
+              FOR THE FESTIVALS
+              {/* <img
                 className="block h-16"
                 src="redxmaslogo.png"
                 alt="redxmaslogo"
-              />
+              /> */}
             </NavLink>
           </div>
           <div className={`flex h-full justify-end`}>
-            <div className="flex gap-2 p-2">
-              {REDXMAS_NAVIGATION().map((item) => (
+            <div className="flex flex-shrink-0 items-center gap-2 p-2 text-2xl font-bold text-red max-lg:hidden">
+              INFITITIS.GR
+              {/* REMOVED NAVLINKS ADDED TEXT */}
+              {/* {REDXMAS_NAVIGATION().map((item) => (
                 <NavLink
                   key={item.name}
                   to={item.href}
@@ -33,7 +39,7 @@ const Header = () => {
                 >
                   {item.name}
                 </NavLink>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
