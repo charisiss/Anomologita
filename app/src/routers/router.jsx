@@ -60,8 +60,12 @@ export const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
+        path: "/",
+        element: <AddNew />,
+      },
+      {
         path: "*",
-        element: <ErrorPage />,
+        element: <AddNew />,
       },
       {
         path: "/home",
@@ -69,7 +73,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/write",
-        element: <AddNew />,
+        element: <HomePage />,
       },
       {
         path: "/add",
