@@ -72,7 +72,7 @@ export default function ShowPage() {
         <div className="w-full">
           <div className="flex justify-center">
             <h2 className="w-auto rounded-xl bg-red p-10 text-center text-7xl font-bold text-white underline">
-              BIT.LY/FTFS
+              bit.ly/forfestivals
             </h2>
           </div>
           {/* <h2 className="py-5 text-center text-5xl font-bold text-white ">
@@ -95,7 +95,7 @@ export default function ShowPage() {
             <div className="flex flex-col pb-4">
               <div className="flex justify-center">
                 <h2 className="w-full rounded-t-xl bg-red p-5 text-center text-4xl font-bold text-white">
-                  BIT.LY/FTFS
+                  bit.ly/forfestivals
                 </h2>
               </div>
 
