@@ -94,12 +94,12 @@ export default function ShowPage() {
           <div className="col-span-2 row-span-3 flex flex-col items-center">
             <div className="flex flex-col pb-4">
               <div className="flex justify-center">
-                <h2 className="w-full rounded-t-xl bg-red p-5 text-center text-4xl font-bold text-white">
+                <h2 className="w-full rounded-t-xl bg-red px-3 py-5 text-center text-3xl font-bold text-white">
                   bit.ly/forfestivals
                 </h2>
               </div>
 
-              <img className="w-50 rounded-b-xl" src="/qr-ftf.png"></img>
+              <img className="w-[280px] rounded-b-xl" src="/qr-ftf.png"></img>
               <p className="mt-2 text-center text-4xl font-bold text-white">
                 SCAN TO WRITE
               </p>
