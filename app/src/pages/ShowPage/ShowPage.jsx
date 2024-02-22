@@ -8,13 +8,11 @@ import {
   updateDoc,
   increment,
 } from "firebase/firestore";
-import { db } from "../../services/firebaseConfig.js";
-import Wrapper from "@components/Layout/Wrapper.jsx";
+import { db } from "../../services/firebaseConfig";
+import Wrapper from "@components/Layout/Wrapper";
 import ShowCard from "@components/ShowCard";
-
 export default function ShowPage() {
   const [completedItems, setCompletedItems] = useState([]);
-  const [topThreeLiked, setTopThreeLiked] = useState([]);
 
   useEffect(() => {
     const q = query(
@@ -28,15 +26,9 @@ export default function ShowPage() {
           id: doc.id,
           ...doc.data(),
         }))
-        .sort((a, b) => {
-          const dateA = parseDateString(a.time);
-          const dateB = parseDateString(b.time);
-          return dateB - dateA; // Sort by time in descending order
-        });
+        .sort((a, b) => b.time.toDate() - a.time.toDate());
 
       setCompletedItems(items.slice(0, 9));
-      const sortedByLikes = [...items].sort((a, b) => b.likes - a.likes);
-      setTopThreeLiked(sortedByLikes.slice(0, 3));
     });
 
     return () => unsubscribe();
@@ -58,13 +50,6 @@ export default function ShowPage() {
         });
     }, timeoutDuration);
   };
-
-  // Helper function to parse the custom date format "dd/mm/yyyy, hh:mm:ss"
-  function parseDateString(dateString) {
-    const [date, time] = dateString.split(", ");
-    const [day, month, year] = date.split("/");
-    return new Date(`${month}/${day}/${year} ${time}`);
-  }
 
   return (
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
