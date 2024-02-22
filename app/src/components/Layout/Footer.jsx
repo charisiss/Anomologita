@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="w-full bg-[#430004]">
+    <div className="w-full bg-red">
       <div className="flex items-center justify-center">
         <p className="mx-4 hidden text-sm text-white xl:block">
           Created by InfinityGreece Web Team &#169; 2024

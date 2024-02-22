@@ -61,18 +61,18 @@ export default function ShowPage() {
 
   // Helper function to parse the custom date format "dd/mm/yyyy, hh:mm:ss"
   function parseDateString(dateString) {
-    const [date, time] = dateString.split(', ');
-    const [day, month, year] = date.split('/');
+    const [date, time] = dateString.split(", ");
+    const [day, month, year] = date.split("/");
     return new Date(`${month}/${day}/${year} ${time}`);
-  };
+  }
 
   return (
     <Wrapper hideHeaderMenu="true" fullWidth={"true"}>
       <div className="gap-15 relative flex w-full flex-col items-center">
         <div className="w-full">
           <div className="flex justify-center">
-            <h2 className="w-auto rounded-xl bg-[#430002] p-10 text-center text-7xl font-bold text-white underline">
-              BIT.LY/FTF
+            <h2 className="w-auto rounded-xl bg-red p-10 text-center text-7xl font-bold text-white underline">
+              BIT.LY/FTFS
             </h2>
           </div>
           {/* <h2 className="py-5 text-center text-5xl font-bold text-white ">
@@ -94,12 +94,12 @@ export default function ShowPage() {
           <div className="col-span-2 row-span-3 flex flex-col items-center">
             <div className="flex flex-col pb-4">
               <div className="flex justify-center">
-                <h2 className="w-full rounded-t-xl bg-[#430002] p-5 text-center text-4xl font-bold text-white">
-                  BIT.LY/FTF
+                <h2 className="w-full rounded-t-xl bg-red p-5 text-center text-4xl font-bold text-white">
+                  BIT.LY/FTFS
                 </h2>
               </div>
 
-              <img className="w-50 rounded-b-xl" src="/qr-red.png"></img>
+              <img className="w-50 rounded-b-xl" src="/qr-ftf.png"></img>
               <p className="mt-2 text-center text-4xl font-bold text-white">
                 SCAN TO WRITE
               </p>

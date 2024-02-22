@@ -81,7 +81,7 @@ const ShowCard = ({
 
           <div className="flex flex-col gap-0">
             <h2 className="text-3xl font-extrabold text-black">{username}</h2>
-            <h2 className="my-2 text-3xl leading-3 text-black">bit.ly/ftf</h2>
+            <h2 className="my-2 text-3xl leading-3 text-black">bit.ly/ftfs</h2>
           </div>
         </div>
         {/* {likes != undefined ? (
