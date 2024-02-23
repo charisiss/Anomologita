@@ -34,23 +34,27 @@ export default function AddNew() {
     // Check if field1 is not empty before submitting
     if (formData.field1.trim() !== "") {
       const currentTime = new Date().toLocaleString(); // Get current time as a string
+      const ticketNumber = new Date().getTime(); // Use the current timestamp as the ticket number
+
       const dataToSubmit = {
         ...formData,
-        time: currentTime, // Use the current time instead of ticket number
-        completed: false,
-        likes: 0,
+        time: currentTime, // Use the current time
+        completed: false, // Initially, items are not completed
+        likes: 0, // Initial likes count
+        ticketNumber, // Add the ticket number to the document
       };
 
       try {
-        await addDoc(collection(db, "anomologita"), dataToSubmit);
-        console.log("Document written with time: ", currentTime);
-        setFormData({ field1: "", likes: 0 }); // Reset formData without field2
-        setIsFormSubmitted(true);
+        await addDoc(collection(db, "anomologita"), dataToSubmit); // Add the document to Firestore
+        console.log("Document written with ID: ", dataToSubmit);
+        setFormData({ field1: "", likes: 0 }); // Reset form data after successful submission
+        setIsFormSubmitted(false); // Reset the form submission status
       } catch (error) {
         console.error("Error adding document: ", error);
       }
     }
   };
+
 
   return (
     <Wrapper>

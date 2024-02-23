@@ -26,9 +26,12 @@ export default function ShowPage() {
           id: doc.id,
           ...doc.data(),
         }))
-        .sort((a, b) => b.time.toDate() - a.time.toDate());
+        // Sort items by ticketNumber in descending order (most recent first)
+        .sort((a, b) => b.ticketNumber - a.ticketNumber)
+        // Take only the first 9 items after sorting
+        .slice(0, 9);
 
-      setCompletedItems(items.slice(0, 9));
+      setCompletedItems(items);
     });
 
     return () => unsubscribe();
